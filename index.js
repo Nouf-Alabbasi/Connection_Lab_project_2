@@ -20,6 +20,8 @@ io.on('connect', (socket) => {
     }
     else {
         socket.role = "hider";
+        socket.broadcast.emit('start', 'seeker')
+        socket.emit('start', socket.role);
     }
 
     socket.on('hide', (data) => {
