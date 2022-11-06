@@ -10,10 +10,14 @@
 
 
 let P_1;
+
+let P_2;
 let sofa_obj;
 
-let sprites =[];
-let spritesheet;
+let sprites_1 =[];
+let sprites_2 =[];
+let spritesheet_1;
+let spritesheet_2;
 let w;
 let h;
 let plant;
@@ -33,12 +37,23 @@ let wall_5;
 let wall_6;
 let wall_7;
 
-let state = "playing";
-let hiding_place;
+let start_btn;
+let temp_btn;
+let instructions_btn;
+// let start_game_btn;
+let player_num = 0;
+let role = "seeker";
+let found = false;
+let clicked = false;
+
+let state = "start";
+let hiding_place = "sofa";
+let search_place;
 
 function preload() {
 //   sprites by @ScissorMarks 
-  spritesheet = loadImage("imgs/DinoSprites-doux.png");
+  spritesheet_1 = loadImage("imgs/DinoSprites-doux.png");
+  spritesheet_2 = loadImage("imgs/DinoSprites-mort.png");
   
   plant = loadImage("imgs/objects_house_0055_Layer-56.png");
   side_table = loadImage("imgs/objects_house_0049_Layer-50.png");
@@ -68,99 +83,287 @@ function setup() {
   wall_7.resize(wall_7.width *0.25, 0);
 
 //   prep sprite (maybe they can pick their char?)
-  spritesheet.resize(spritesheet.width *2.5, spritesheet.height *2.5);
-  w = int(spritesheet.width /24);
-  h = int(spritesheet.height);
+  spritesheet_1.resize(spritesheet_1.width *2.5, spritesheet_1.height *2.5);
+  w = int(spritesheet_1.width /24);
+  h = int(spritesheet_1.height);
   
   for (let y = 0; y <1 ; y++) {
-    sprites[y] = [];
+    sprites_1[y] = [];
     for (let x = 0; x < 24; x++) {
-      sprites[y][x] = spritesheet.get(x * w, y * h, w, h);
+      sprites_1[y][x] = spritesheet_1.get(x * w, y * h, w, h);
     } // iterate over rows
   } // iterate over columns
-
+  
+  spritesheet_2.resize(spritesheet_2.width *2.5, spritesheet_2.height *2.5);
+  w = int(spritesheet_2.width /24);
+  h = int(spritesheet_2.height);
+  
+  for (let y = 0; y <1 ; y++) {
+    sprites_2[y] = [];
+    for (let x = 0; x < 24; x++) {
+      sprites_2[y][x] = spritesheet_2.get(x * w, y * h, w, h);
+    } // iterate over rows
+  } // iterate over columns
   
 // // // // // 
-  P_1 = new Player();
+  P_2 = new Player(sprites_2);
+  P_1 = new Player(sprites_1);
   sides = wall_4.width+7;
   
 
 //   creating the furniture obj
   plant_obj = new furniture("plant",plant,width/4 + (sofa.width/6)+(plant.width/6)+30,sides+(bed.height/6)+(sofa.height/6));
-  
   side_table_obj_1 = new furniture("side_table_1",side_table,(200+bed.width/6),sides + (side_table.height/6)/2);
-  
   side_table_obj_2 = new furniture("side_table_2", side_table,height/2-(bed.width/6),sides + (side_table.height/6)/2);
-  
   table_obj = new furniture("table",table,width-sides*3.2,-sides+height-(table.height/6));
-  
   bed_obj = new furniture("bed",bed,height/2,sides+((bed.height/6)/2));
-  
   Sofa_chair_obj = new furniture("Sofa_chair",Sofa_chair,height/2-((Sofa_chair.width/6)/4),height-sides-(Sofa_chair.width/6));
   sofa_obj = new furniture("sofa",sofa,width/4 + (sofa.width/6),sides+(bed.height/6)+(sofa.height/6));
+  
+  //creating button obj
+  start_btn = new BUTTON("start", width/2,height/2+30);
+  temp_btn = new BUTTON("2players_in", 50,10);
+  
+  textFont("VT323"); 
+  textSize(15);
+  instructions_btn = new BUTTON("start game",width/2+(textWidth("instructions")/2)-35,height-50);
+  // start_game_btn = new BUTTON("start game",width-30,height/2+30 );
+  
 }//end of setup
 
 function draw() {
 
-  if (state == "end"){
-    rectMode(CORNER);
-    fill("black");
-    rect(0,0,height,width)
-    
-    textFont("VT323"); 
-    textSize(20);
-    fill("white");
-    let Text = "hiding place: " + hiding_place;
-    text(Text,width/2-textWidth(Text)/2, height/2);
-    
-    textSize(15);
-    text("press return to restart",width/2-textWidth("press return to restart")/2, (height/3)*2);
-    text("(restart not implemented yet)",width/2-textWidth("(restart not implemented yet)")/2, (height/3)*2+30);
-  }
-  else if (state == "playing")
+  if(state == "start"){
+     start()
+   }
+  else if (state == "waiting")
   {
-      draw_game()
+    waiting_page();
   }
+  else if (state == "display role")
+  {
+    display_role();
+  }
+  else if (state == "instructions")
+  {
+    instructions();
+  }
+  else if (state == "start_game")
+  {
+    if (role == "hider"){
+      hider() 
+    }
+    else{
+      seeker();
+    }
+  }
+  else if (state == "hidden"){
+      hidden();
+  }
+  else if (state == "end"){
+    print("end");  
+    end();
+  }
+  
 }//end of draw function
 
-function draw_game(){
+function mouseClicked() {
+  if(start_btn.InRange()){
+    state = "waiting";
+  }
+  if (temp_btn.InRange()){
+    player_num = 2;
+  }
+  
+  if(instructions_btn.InRange()){
+    state = "display role";
+  }
+  
+}
+
+function keyPressed() {
+  if (state =="start_game"){
+    if (key == ' ') {
+        if (role =="hider")
+          {
+            noLoop();
+            state = "hidden"; 
+        }
+        // else if (role =="seeker"){
+        //     if (found){//search_place == hiding_place){
+        //         state = "end";
+        //     }
+        // }
+    }
+  }
+}
+
+
+function start(){
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,height,width);
+
+  textFont("VT323"); 
+  textSize(50);
+  fill("white");
+  let Text = "HIDE and SEEK";
+  text(Text,width/2-textWidth(Text)/2, height/2);
+  start_btn.draw_button();
+    
+}
+
+function end(){
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,height,width);
+
+  textFont("VT323"); 
+  textSize(50);
+  fill("white");
+  let Text = "Game Ended";
+  text(Text,width/2-textWidth(Text)/2, height/2);
+    
+}
+
+
+let k = 200;
+let waiting_text = "WAITING";
+let Second_line = "";
+let stop_time = 1000000;
+
+function waiting_page(){
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,height,width);
+  
+  textSize(15);
+  fill("white");
+  let Text = "waiting for a second player to join";
+  text(Text,width/2-textWidth(Text)/2, height/4);
+  
+  temp_btn.draw_button();
+
+  if (player_num < 2)
+  {
+    //waiting animiation
+    strokeWeight(10);
+    stroke("white");
+    if (k> (width/2+textWidth("WAITING")/2) +30)
+    {
+      point(k-30, height/2-5);
+    }
+    if (k > (width/2+textWidth("WAITING")/2) +60)
+    {
+      point(k-60, height/2-5);
+    }
+
+    if (k >400)
+    {
+      k = width/2+textWidth("WAITING")/2;
+    }
+    k+=2;
+  }
+  else if (player_num == 2)
+  {
+    player_num +=1;
+    stop_time = frameCount;
+    textSize(25);
+    waiting_text = "Second Player is in!";
+    fill("white");
+    Second_line = "Game starting soon";
+    // text("Game starting soon",width/2-textWidth("Game starting soon")/2, height/2+30);
+  }
+  if (frameCount-stop_time > 60)
+  {
+    stop_time = frameCount;
+    state = "instructions"
+  }
+  //end of waiting animiation
+  fill("white");
+  noStroke();
+  textWrap(WORD);
+  text(waiting_text,width/2-textWidth(waiting_text)/2, height/2);
+  text(Second_line,width/2-textWidth(Second_line)/2, height/2+30);
+}
+
+function instructions(){
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,height,width)
+  
+  textFont("VT323"); 
+  textSize(25);
+  fill("white");
+  let Text = "Instructions";
+  text(Text,width/2-textWidth(Text)/2, 50);
+  
+  textSize(20);
+  text("to be added",width/2-textWidth("to be added")/2, 100);
+  instructions_btn.draw_button();
+}
+
+function display_role(){
+  cursor("default");
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,height,width)
+  
+  textFont("VT323"); 
+  textSize(30);
+  fill("white");
+  let role_text = "You are the: "+role;
+  text(role_text,width/2-textWidth(role_text)/2, 100);
+  
+  if (frameCount-stop_time>180)
+  {
+    state = "start_game"
+  }
+}
+
+function hidden(){
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,height,width)
+
+  textFont("VT323"); 
+  textSize(20);
+  fill("white");
+  let Text = "hiding place: " + hiding_place;
+  text(Text,width/2-textWidth(Text)/2, height/2);
+
+  textSize(15);
+  text("press return to restart",width/2-textWidth("press return to restart")/2, (height/3)*2);
+  text("(restart not implemented yet)",width/2-textWidth("(restart not implemented yet)")/2, (height/3)*2+30);
+}
+
+function hider(){
   imageMode(CENTER);
   background("#7a8786"); 
   imageMode(CENTER);
   
 // walls
 //   left wall
-  for (let i=0; i<height; i+= wall_4.height)
-  {
-    image(wall_4,wall_4.width/2,i);
-  }
+  image(wall_4,wall_4.width/2,wall_1.height*1.5);
+  image(wall_4,wall_4.width/2,wall_1.height*2.5);
+  image(wall_4,wall_4.width/2,wall_1.height*3.2);
 
 //   right wall
   // image(wall_4,width-wall_4.width/2,wall_1.height*1.5);
-    for (let i=wall_4.height*2.5; i<height; i+= wall_4.height)
-    {
-      image(wall_4,width-wall_4.width/2,i);
-    }
+  image(wall_4,width-wall_4.width/2,wall_1.height*2.5);
+  image(wall_4,width-wall_4.width/2,wall_1.height*3.2);
 
 //  top wall
-  for (let i=0; i<width; i+= wall_6.width)
-  {
-    image(wall_6,i,wall_6.height/2);
-  }
-  // image(wall_6,wall_6.width/2,wall_6.height/2);
-  // image(wall_7,wall_7.width*1.5,wall_7.height/2);
-  // image(wall_7,wall_7.width*2.5,wall_7.height/2);
-  // image(wall_7,wall_7.width*3.2,wall_7.height/2);
+  image(wall_6,wall_6.width/2,wall_6.height/2);
+  image(wall_7,wall_7.width*1.5,wall_7.height/2);
+  image(wall_7,wall_7.width*2.5,wall_7.height/2);
+  image(wall_7,wall_7.width*3.2,wall_7.height/2);
 
 //  bottom wall
-  for (let i=0; i<width; i+= wall_6.width)
-  {
-    image(wall_6,i,height-wall_6.height/2);
-  }
-  // image(wall_6,wall_6.width/2,height-wall_6.height/2);
-  // image(wall_7,wall_7.width*1.5,height-wall_7.height/2);
-  // image(wall_7,wall_7.width*2.5,height-wall_7.height/2);
-  // image(wall_7,wall_7.width*3.2,height-wall_7.height/2);
+  image(wall_6,wall_6.width/2,height-wall_6.height/2);
+  image(wall_7,wall_7.width*1.5,height-wall_7.height/2);
+  image(wall_7,wall_7.width*2.5,height-wall_7.height/2);
+  image(wall_7,wall_7.width*3.2,height-wall_7.height/2);
   
 //   corners
   image(wall_1,wall_1.width/2,wall_1.height/2);
@@ -177,8 +380,61 @@ function draw_game(){
   bed_obj.draw();
   
   Sofa_chair_obj.draw();
-  P_1.draw();
+  if (role == "hider")
+  {
+    P_1.draw(); 
+  }
+  else{
+    P_2.draw();
+  }
 }
+
+function seeker(){
+  imageMode(CENTER);
+  background("#7a8786"); 
+  imageMode(CENTER);
+  
+// walls
+//   left wall
+  image(wall_4,wall_4.width/2,wall_1.height*1.5);
+  image(wall_4,wall_4.width/2,wall_1.height*2.5);
+  image(wall_4,wall_4.width/2,wall_1.height*3.2);
+
+//   right wall
+  // image(wall_4,width-wall_4.width/2,wall_1.height*1.5);
+  image(wall_4,width-wall_4.width/2,wall_1.height*2.5);
+  image(wall_4,width-wall_4.width/2,wall_1.height*3.2);
+
+//  top wall
+  image(wall_6,wall_6.width/2,wall_6.height/2);
+  image(wall_7,wall_7.width*1.5,wall_7.height/2);
+  image(wall_7,wall_7.width*2.5,wall_7.height/2);
+  image(wall_7,wall_7.width*3.2,wall_7.height/2);
+
+//  bottom wall
+  image(wall_6,wall_6.width/2,height-wall_6.height/2);
+  image(wall_7,wall_7.width*1.5,height-wall_7.height/2);
+  image(wall_7,wall_7.width*2.5,height-wall_7.height/2);
+  image(wall_7,wall_7.width*3.2,height-wall_7.height/2);
+  
+//   corners
+  image(wall_1,wall_1.width/2,wall_1.height/2);
+  image(wall_5,width-wall_5.width/2,height-wall_5.height/2);
+  image(wall_3,width-wall_3.width/2,wall_3.height/2);
+    image(wall_2,wall_2.width/2,height-wall_2.height/2);
+  
+//   draw the furniture
+  sofa_obj.draw();
+  plant_obj.draw();
+  side_table_obj_1.draw();
+  side_table_obj_2.draw();
+  table_obj.draw();
+  bed_obj.draw();
+  
+  Sofa_chair_obj.draw();
+  P_2.draw();
+}
+
 
 function popup(Text)
 {
@@ -199,14 +455,54 @@ function popup(Text)
   
 }
 
-function keyPressed() {
-  if (key == ' ') {
-    noLoop();
-    state = "end";
+class BUTTON{
+  constructor(text,x_pos,y_pos){
+    this.text = text;
+    this.x_pos = x_pos;
+    this.y_pos = y_pos;
+    textFont("monospace");
+    textSize(15);
+    this.width_button = textWidth(this.text)+7;
+    this.height_button = 30;
+    this.d = dist(mouseX, mouseY, this.x_pos, this.y_pos);
+  }
+  
+  draw_button(){
+//   button hover effect
+    rectMode(CENTER);
+    if (this.InRange())
+    {
+      fill("white")
+      rect(this.x_pos+2,this.y_pos+2,this.width_button,this.height_button);
+      cursor('pointer'); 
+    }else {
+      fill("red");
+      rect(this.x_pos+2,this.y_pos+2,this.width_button,this.height_button);
+      cursor("default");
+    }
+//     add button labels
+    textFont("monospace");
+    textSize(15);
+    noStroke();
+    fill("black")
+    text(this.text,this.x_pos-(this.width_button-10)/2,this.y_pos+(this.height_button/4));   
+  }
+  
+  InRange(){
+    this.d = dist(mouseX, mouseY, this.x_pos, this.y_pos);
+        if (mouseX > this.x_pos-this.width_button/2 && mouseX < this.x_pos + this.width_button/2 && mouseY > this.y_pos-this.height_button/2 && mouseY < this.y_pos + this.height_button)
+      { 
+      return true;
+    }
+    else{
+      return false;
+    }
+
   }
 }
+
 class Player{
-  constructor(){
+  constructor(sprites){
     this.x_pos = 370;
     this.y_pos = 130;
     this.speed = 3;
@@ -215,6 +511,7 @@ class Player{
     this.left = 1;
     this.sprite_spd = 6;
     this.step = 0;
+    this.sprites = sprites;
   }
   
   draw(){
@@ -233,12 +530,14 @@ class Player{
     
     // this.check_sides();
     if (!this.left){
-      image(sprites[0][this.step], this.x_pos, this.y_pos);
+      // image(this.sprites[0][this.step], this.x_pos, this.y_pos);
+      image(this.sprites[0][this.step], this.x_pos, this.y_pos);
     }
     else{
       push();
       scale(-1, 1);
-      image(sprites[0][this.step], -this.x_pos, this.y_pos);
+      // image(this.sprites[0][this.step], -this.x_pos, this.y_pos);
+      image(this.sprites[0][this.step], -this.x_pos, this.y_pos);
       pop();
     }
     
@@ -365,7 +664,15 @@ class furniture{
     imageMode(CENTER);
     rectMode(CENTER);
     noFill();
-    this.checkBound(P_1.get_x(),P_1.get_y(),P_1.get_w(),P_1.get_h());
+    if (role =="hider")
+      {
+        this.checkBound(P_1.get_x(),P_1.get_y(),P_1.get_w(),P_1.get_h());
+      }
+    else{
+      this.checkBound(P_2.get_x(),P_2.get_y(),P_2.get_w(),P_2.get_h());
+    }
+    
+    
     stroke(this.color);
     fill(this.color)
     rect(this.x,this.y,this.w,this.h);
@@ -377,13 +684,35 @@ class furniture{
     strokeWeight(7);
     noStroke();
 //  if player in range of obj
+    //(if statment inspired by: https://happycoding.io Collision Detection tutorial)
     if (x + w/4 > this.x-this.w/2 && x - w/4 < this.x + this.w/2 && y+h/4 > this.y-this.h/2 && y-h/4 < this.y + this.h/2)
       {
-        popup("click space to hide");
-        hiding_place = this.place;
-        this.color = "red";
+        if (role == "hider")
+        {
+          popup("click space to hide");
+          hiding_place = this.place;
+          this.color = "red";
+        }
+        else if (role =="seeker")
+        {
+          search_place = this.place;
+          this.color = "green";
+          if (!keyIsDown(32))
+          {
+             popup("click space to search here"); 
+          }
+          else{
+            if (search_place == hiding_place)
+            {
+              found = true;
+              state = "end";
+            }
+            else{
+              popup("no one is hiding here");
+            }
+          }
+        }
     }
-    //(if statment inspired by: https://happycoding.io Collision Detection tutorial)
   }
 
 }
