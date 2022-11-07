@@ -77,7 +77,7 @@ let socket;
   let clicked = false;
   
   let state = "start";
-  let hiding_place = "sofa";
+  let hiding_place = "a";
   let search_place;
   
   function preload() {
@@ -215,6 +215,10 @@ let socket;
             role = data;
         })
 
+        socket.on('set_hiding_place',(data)=>{
+          hiding_place=data;
+        })
+
     }
     if (temp_btn.InRange()){
       player_num = 2;
@@ -235,11 +239,11 @@ let socket;
               state = "hidden";
               socket.emit('hide',hiding_place);
           }
-          // else if (role =="seeker"){
-          //     if (found){//search_place == hiding_place){
-          //         state = "end";
-          //     }
-          // }
+          else if (role =="seeker"){
+              if (found){//search_place == hiding_place){
+                  state = "end";
+              }
+          }
       }
     }
   }

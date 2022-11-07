@@ -25,7 +25,7 @@ io.on('connect', (socket) => {
     }
 
     socket.on('hide', (data) => {
-        console.log(data);
+        io.emit('set_hiding_place', data);
     })
 
 
