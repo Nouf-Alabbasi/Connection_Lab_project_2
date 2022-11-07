@@ -10,7 +10,7 @@
 //     console.log(data);
 // })
 
-
+let socket;
 
 
 
@@ -202,7 +202,7 @@
       state = "waiting";
       
 
-        let socket = io();
+        socket = io();
         socket.on('connect', () => {
             console.log("connection established to server");
             role = socket.role;
@@ -232,7 +232,8 @@
           if (role =="hider")
             {
               noLoop();
-              state = "hidden"; 
+              state = "hidden";
+              socket.emit('hide',hiding_place);
           }
           // else if (role =="seeker"){
           //     if (found){//search_place == hiding_place){
@@ -360,7 +361,7 @@
     let role_text = "You are the: "+role;
     text(role_text,width/2-textWidth(role_text)/2, 100);
     
-    if (frameCount-stop_time>180)
+    if (frameCount-stop_time>280)
     {
       state = "start_game"
     }
