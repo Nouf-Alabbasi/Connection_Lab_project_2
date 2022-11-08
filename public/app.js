@@ -83,7 +83,7 @@ let socket;
   let num_searched_places = 0;
   let max_num_searches = 3;
   let hide_time = 0;
-  let max_hide_time = 500;
+  let max_hide_time = 600;
 
   function preload() {
   //   sprites by @ScissorMarks 
@@ -167,7 +167,6 @@ let socket;
   }//end of setup
   
   function draw() {
-  
     if(state == "start"){
        start()
      }
@@ -245,7 +244,6 @@ let socket;
     
     if(instructions_btn.InRange()){
       state = "display role";
-      hide_time = frameCount;
     }
     
   }
@@ -302,6 +300,7 @@ let socket;
     let word = won?'won':'lost';
     Text=`You have ${word} the game!`
     text(Text,width/2-textWidth(Text)/2, height/2+50);
+    noLoop();
   }
   
   
@@ -396,6 +395,7 @@ let socket;
     if (frameCount-stop_time>280)
     {
       state = "start_game"
+      hide_time = frameCount;
     }
   }
   
@@ -416,8 +416,6 @@ let socket;
   }
   
   function hider(){
-    print("sub:", frameCount-hide_time)
-    print("hide time ", hide_time);
     if (frameCount-hide_time > max_hide_time)
     {
       state = "hidden";
@@ -468,7 +466,12 @@ let socket;
     Sofa_chair_obj.draw();
     if (role == "hider")
     {
-      P_1.draw(); 
+      P_1.draw();
+      textFont("VT323"); 
+      textSize(20);
+      fill("white");
+      let timer = "time: " + int((frameCount-hide_time)/60);
+      text(timer, wall_4.width,20);
     }
     else{
       P_2.draw();
@@ -519,6 +522,12 @@ let socket;
     
     Sofa_chair_obj.draw();
     P_2.draw();
+
+    textFont("VT323"); 
+    textSize(20);
+    fill("white");
+    let timer = "number of searched places " + (num_searched_places);
+    text(timer, wall_4.width,20);
   }
   
   
