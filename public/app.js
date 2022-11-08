@@ -69,7 +69,7 @@ let socket;
   let wall_7;
   
   let start_btn;
-  let temp_btn;
+  // let temp_btn;
   let instructions_btn;
   // let start_game_btn;
   let player_num = 0;
@@ -78,9 +78,13 @@ let socket;
   let clicked = false;
   
   let state = "start";
-  let hiding_place = "a";
+  let hiding_place = "bed";
   let search_place;
-  
+  let num_searched_places = 0;
+  let max_num_searches = 3;
+  let hide_time = 0;
+  let max_hide_time = 600;
+
   function preload() {
   //   sprites by @ScissorMarks 
     spritesheet_1 = loadImage("imgs/DinoSprites-doux.png");
@@ -153,7 +157,7 @@ let socket;
     
     //creating button obj
     start_btn = new BUTTON("start", width/2,height/2+30);
-    temp_btn = new BUTTON("2players_in", 50,10);
+    // temp_btn = new BUTTON("2players_in", 50,10);
     
     textFont("VT323"); 
     textSize(15);
@@ -163,7 +167,6 @@ let socket;
   }//end of setup
   
   function draw() {
-  
     if(state == "start"){
        start()
      }
@@ -181,6 +184,7 @@ let socket;
     }
     else if (state == "start_game")
     {
+      print(hide_time);
       if (role == "hider"){
         hider() 
       }
@@ -234,9 +238,9 @@ let socket;
         })
 
     }
-    if (temp_btn.InRange()){
-      player_num = 2;
-    }
+    // if (temp_btn.InRange()){
+    //   player_num = 2;
+    // }
     
     if(instructions_btn.InRange()){
       state = "display role";
@@ -253,6 +257,12 @@ let socket;
               socket.emit('hide',hiding_place);
           }
           else if (role =="seeker"){
+              num_searched_places+=1;
+              if (num_searched_places > max_num_searches)
+              {
+                socket.emit('end',"hider");
+              }
+              print("num: ",num_searched_places);
               if (found){//search_place == hiding_place){
                   socket.emit('end',role);
               }
@@ -290,6 +300,7 @@ let socket;
     let word = won?'won':'lost';
     Text=`You have ${word} the game!`
     text(Text,width/2-textWidth(Text)/2, height/2+50);
+    noLoop();
   }
   
   
@@ -308,7 +319,7 @@ let socket;
     let Text = "waiting for a second player to join";
     text(Text,width/2-textWidth(Text)/2, height/4);
     
-    temp_btn.draw_button();
+    // temp_btn.draw_button();
   
     if (player_num < 2)
     {
@@ -384,6 +395,7 @@ let socket;
     if (frameCount-stop_time>280)
     {
       state = "start_game"
+      hide_time = frameCount;
     }
   }
   
@@ -404,6 +416,12 @@ let socket;
   }
   
   function hider(){
+    if (frameCount-hide_time > max_hide_time)
+    {
+      state = "hidden";
+      socket.emit('hide',hiding_place);
+    }
+
     imageMode(CENTER);
     background("#7a8786"); 
     imageMode(CENTER);
@@ -448,7 +466,12 @@ let socket;
     Sofa_chair_obj.draw();
     if (role == "hider")
     {
-      P_1.draw(); 
+      P_1.draw();
+      textFont("VT323"); 
+      textSize(20);
+      fill("white");
+      let timer = "time: " + int((frameCount-hide_time)/60);
+      text(timer, wall_4.width,20);
     }
     else{
       P_2.draw();
@@ -499,6 +522,12 @@ let socket;
     
     Sofa_chair_obj.draw();
     P_2.draw();
+
+    textFont("VT323"); 
+    textSize(20);
+    fill("white");
+    let timer = "number of searched places " + (num_searched_places);
+    text(timer, wall_4.width,20);
   }
   
   
