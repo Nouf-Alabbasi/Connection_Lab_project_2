@@ -24,6 +24,10 @@ io.on('connect', (socket) => {
         socket.emit('start', socket.role);
     }
 
+    socket.on('end', (data) => {
+        io.emit('end_screen', data);
+    })
+
     socket.on('hide', (data) => {
         io.emit('set_hiding_place', data);
     })

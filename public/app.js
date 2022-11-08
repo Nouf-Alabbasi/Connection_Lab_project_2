@@ -5,6 +5,7 @@
 //     console.log("connection established to server");
 // })
 
+
 // socket.on('start',(data)=>{
 //     player_num=2;
 //     console.log(data);
@@ -191,7 +192,7 @@ let socket;
         hidden();
     }
     else if (state == "end"){
-      print("end");  
+      //print("end");  
       end();
     }
     
@@ -219,6 +220,17 @@ let socket;
           hiding_place=data;
         })
 
+        socket.on('end_screen',(data)=>{
+          if (data==role){
+            console.log('win!!!')
+            state='end';
+          }
+          else{
+            console.log('lost!!')
+            state='end';
+          }
+        })
+
     }
     if (temp_btn.InRange()){
       player_num = 2;
@@ -241,7 +253,7 @@ let socket;
           }
           else if (role =="seeker"){
               if (found){//search_place == hiding_place){
-                  state = "end";
+                  socket.emit('end',role);
               }
           }
       }
@@ -755,7 +767,8 @@ let socket;
               if (search_place == hiding_place)
               {
                 found = true;
-                state = "end";
+                //state = "end";
+                socket.emit('end',role);
               }
               else{
                 popup("no one is hiding here");
