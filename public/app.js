@@ -41,7 +41,7 @@ let socket;
 
 
   let P_1;
-
+  let won;
   let P_2;
   let sofa_obj;
   
@@ -223,10 +223,12 @@ let socket;
         socket.on('end_screen',(data)=>{
           if (data==role){
             console.log('win!!!')
+            won = true;
             state='end';
           }
           else{
             console.log('lost!!')
+            won=false;
             state='end';
           }
         })
@@ -247,7 +249,6 @@ let socket;
       if (key == ' ') {
           if (role =="hider")
             {
-              noLoop();
               state = "hidden";
               socket.emit('hide',hiding_place);
           }
@@ -285,7 +286,10 @@ let socket;
     fill("white");
     let Text = "Game Ended";
     text(Text,width/2-textWidth(Text)/2, height/2);
-      
+    textSize(30);
+    let word = won?'won':'lost';
+    Text=`You have ${word} the game!`
+    text(Text,width/2-textWidth(Text)/2, height/2+50);
   }
   
   
