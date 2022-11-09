@@ -68,6 +68,7 @@ let table;
 let bed;
 let single_bed;
 let Sofa_chair;
+let Sofa_chair_2;
 let sofa;
 let tv;
 let sofa_side;
@@ -141,6 +142,7 @@ function preload() {
   table = loadImage("imgs/objects_house_0039_Layer-40.png");
   bed = loadImage("imgs/objects_house_0035_Layer-36.png");
   Sofa_chair = loadImage("imgs/objects_house_0013_Layer-14-1.png");
+  Sofa_chair_2 = loadImage("imgs/2objects_house_0013_Layer-14-1.png");
   sofa = loadImage("imgs/objects_house_0004_Layer-5.png");
   // single_bed = loadImage("imgs/objects_house_0004_Layer-5.png");
   // tv = loadImage("imgs/objects_house_0004_Layer-5.png");
@@ -209,17 +211,17 @@ function setup() {
   // room 2
   plant_obj_room2 = new furniture("plant in living room",plant,800,70);
   table_obj_room2 = new furniture("table in living room",table,650,330);
-  Sofa_chair_obj_room2 = new furniture("Sofa chair 1 in living room",Sofa_chair,570,150);
+  Sofa_chair_obj_room2 = new furniture("Sofa chair 1 in living room",Sofa_chair,570,200);
   Sofa_chair_obj2_room2 = new furniture("Sofa chair 2 in living room",Sofa_chair,700,150);
   sofa_obj_room2 = new furniture("sofa in living room",sofa,630,60);
+  rug_room2 = new furniture("rug in guest room",rug,630,140);
 
   // room 3
   bed_obj_room3 = new furniture("bed in guest room",single_bed,600,450);
   bed_obj_2_room3 = new furniture("bed in guest room",single_bed,500,450);
   tv_room3 = new furniture("Tv in guest room",tv,830,450)
   sofa_room3 = new furniture("sofa in guest room",sofa_side,750,450)
-  
-  sofa_room3 = new furniture("sofa in guest room",sofa_side,750,450)
+
 
 
   // room 3
@@ -594,6 +596,7 @@ image(wall_7,i, height-wall_6.height/2);
   bed_obj_2_room3.draw();
   tv_room3.draw();
   sofa_room3.draw();
+  rug_room2.draw();
 
   // P_2.x_pos=seeker_x;
   // P_2.y_pos=seeker_y;
@@ -703,6 +706,7 @@ rect(width-300,height/2-1, 100,12);
  bed_obj_2_room3.draw();
  tv_room3.draw();
  sofa_room3.draw();
+ rug_room2.draw();
 
   if (role == "hider")
   {
@@ -773,6 +777,7 @@ image(wall_7,i, height-wall_6.height/2);
  bed_obj_2_room3.draw();
  tv_room3.draw();
  sofa_room3.draw();
+ rug_room2.draw();
 
   P_2.draw();
   
@@ -887,7 +892,7 @@ class Player{
   
   check_in_Bound(){
     
-    if (sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_2_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  bed_obj_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || sofa_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height))
+    if (sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_2_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  bed_obj_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || sofa_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || rug_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) )
     {
       return true;
     }
@@ -912,6 +917,8 @@ class Player{
   bed_obj_2_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   sofa_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
+  rug_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height)
+
   this.move();
   // rect(this.x_pos,this.y_pos,this.width,this.height);
   
