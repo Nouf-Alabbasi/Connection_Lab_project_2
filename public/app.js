@@ -255,7 +255,7 @@ function setup() {
   
   textFont("VT323"); 
   textSize(15);
-  instructions_btn = new BUTTON("start game",width/2+(textWidth("instructions")/2)-35,height-50);
+  instructions_btn = new BUTTON("start game",width/2+(textWidth("instructions")/2)-35,height-100);
   // start_game_btn = new BUTTON("start game",width-30,height/2+30 );
   
 }//end of setup
@@ -264,7 +264,7 @@ function draw() {
   print(mouseX,mouseY);
   if(state == "start"){
       // start()
-      waiting_page();
+      instructions();
       // hider() 
     }
   else if (state == "waiting")
@@ -458,7 +458,7 @@ function end(){
 }
 
 
-let k = 200;
+let k = 700;
 let waiting_text = "WAITING";
 let Second_line = "";
 let stop_time = 1000000;
@@ -483,15 +483,28 @@ function waiting_page(){
     stroke("white");
     if (k> (width/2+textWidth("WAITING")/2) +30)
     {
+      print("this");
       point(k-30, height/2-5);
     }
     if (k > (width/2+textWidth("WAITING")/2) +60)
     {
+      print("that");
       point(k-60, height/2-5);
     }
-
-    if (k >400)
+    if (k > (width/2+textWidth("WAITING")/2) +90)
     {
+      print("that");
+      point(k-90, height/2-5);
+    }
+    if (k > (width/2+textWidth("WAITING")/2) +120)
+    {
+      print("that");
+      point(k-120, height/2-5);
+    }
+
+    if (k >860)
+    {
+      print("these");
       k = width/2+textWidth("WAITING")/2;
     }
     k+=2;
@@ -525,14 +538,42 @@ function instructions(){
   rect(0,0,width,height)
 
   textFont("VT323"); 
-  textSize(25);
+  textSize(70);
   fill("white");
   let Text = "Instructions";
-  text(Text,width/2-textWidth(Text)/2, 50);
-  
-  textSize(20);
-  text("to be added",width/2-textWidth("to be added")/2, 100);
+  text(Text,width/2-textWidth(Text)/2, 100);
+
+  textFont("monospace"); 
+  textSize(25);
+  let line_1 = "This is an online hide and seek game. You play online with another player.";
+  let line_2 = "One player will be the seeker, and the other would be the hider";
+  let line_3 = "To move The players would use the";
+  let line_4 = " up  down  left  right";
+  let line_5 = " arrows";
+  let line_6 = " The seeker should press the space bar to search a hiding spot";
+  let line_7 = " The hider should press the space bar to hide in a hiding spot";
+  let line_8 = "SPACE";
+  fill("white");
+  rect(585+14,250,58,50);
+  rect(656+15,250,70,50);
+  rect(745+15,250,70,50);
+  rect(850,250,80,50);
+  rect(width/2-400/2,460,400,60);
+  text(line_1,width/2-textWidth(line_1)/2, 170);
+  text(line_2,85, 220);
+  text(line_3,85, 280);
+  text(line_6,70, 360);
+  text(line_7,70, 410);
+  fill("black");
+  text(line_4,600, 280);
+  text(line_8,width/2-(textWidth(line_8)/2), 500);
+
+  fill("white");
+  text(line_5,930, 280);
+  // text(line_4,width/2-textWidth(line_4)/2, 250);
+
   instructions_btn.draw_button();
+  
 }
 
 function display_role(){
@@ -542,14 +583,14 @@ function display_role(){
   rect(0,0,width,height)
   
   textFont("VT323"); 
-  textSize(30);
+  textSize(100);
   fill("white");
   let role_text = "You are the: "+role;
-  text(role_text,width/2-textWidth(role_text)/2, 100);
+  text(role_text,width/2-textWidth(role_text)/2, 300);
   if (role=='seeker'){
     wait_text = "waiting for the hider to hide"
-    textSize(20);
-    text(wait_text,width/2-textWidth(wait_text)/2, 150);
+    textSize(40);
+    text(wait_text,width/2-textWidth(wait_text)/2, 370);
   }
 
   if ((frameCount-stop_time>100 && role=='hider') || (role=='seeker' && hid))
@@ -905,9 +946,9 @@ class BUTTON{
     this.text = text;
     this.x_pos = x_pos;
     this.y_pos = y_pos;
-    textFont("monospace");
-    textSize(15);
-    this.width_button = textWidth(this.text)+85;
+    textFont("VT323");
+    textSize(50);
+    this.width_button = textWidth(this.text)+35;
     this.height_button = 60;
     this.d = dist(mouseX, mouseY, this.x_pos, this.y_pos);
   }
@@ -930,7 +971,7 @@ class BUTTON{
     textSize(50);
     noStroke();
     fill("black")
-    text(this.text,this.x_pos-(this.width_button-31)/2,this.y_pos+(this.height_button/4));   
+    text(this.text,this.x_pos-(this.width_button-35)/2,this.y_pos+(this.height_button/4));   
   }
   
   InRange(){
