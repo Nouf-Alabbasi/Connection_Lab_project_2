@@ -31,6 +31,9 @@ io.on('connect', (socket) => {
     socket.on('hide', (data) => {
         io.emit('set_hiding_place', data);
     })
+    socket.on('move', (data) => {
+        io.emit('move_seeker', data);
+    })
 
 
 
