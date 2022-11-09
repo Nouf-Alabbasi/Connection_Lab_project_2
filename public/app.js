@@ -263,9 +263,10 @@ function setup() {
 function draw() {
   print(mouseX,mouseY);
   if(state == "start"){
-      // start()
-      instructions();
+      start()
+      // instructions();
       // hider() 
+      // end();
     }
   else if (state == "waiting")
   {
@@ -445,14 +446,14 @@ function end(){
   rect(0,0,width,height);
 
   textFont("VT323"); 
-  textSize(50);
+  textSize(100);
   fill("white");
   let Text = "Game Ended";
   text(Text,width/2-textWidth(Text)/2, height/2);
-  textSize(30);
+  textSize(50);
   let word = won?'won':'lost';
   Text=`You have ${word} the game!`
-  text(Text,width/2-textWidth(Text)/2, height/2+50);
+  text(Text,width/2-textWidth(Text)/2, height/2+70);
   socket.disconnect();
   noLoop();
 }
@@ -604,7 +605,26 @@ function hider_hidden(){
   imageMode(CENTER);
   background("#7a8786"); 
   imageMode(CENTER);
-  
+
+  // draw placeholder rooms
+  rectMode(CORNER);
+  noStroke();
+  fill("#201E1F");
+  rect(0,height/2,width/3,height/2);
+  rect((width/3)*2,height/2,width/3,height/2);
+
+  textFont("VT323"); 
+  textSize(50);
+  fill("white");
+
+  text("HIDE",150, 500);
+  text("and",180, 550);
+  text("SEEK",210, 600);
+
+  text("HIDE",990, 500);
+  text("and",1020, 550);
+  text("SEEK",1050, 600); 
+
 // walls
 //   left wall
 for (let i=0; i<height; i+= wall_1.height)
@@ -721,7 +741,26 @@ function hider(){
   // imageMode(CENTER);
   background("#7a8786"); 
   imageMode(CENTER);
-  
+
+  // draw placeholder rooms
+  rectMode(CORNER);
+  noStroke();
+  fill("#201E1F");
+  rect(0,height/2,width/3,height/2);
+  rect((width/3)*2,height/2,width/3,height/2);
+
+  textFont("VT323"); 
+  textSize(50);
+  fill("white");
+
+  text("HIDE",150, 500);
+  text("and",180, 550);
+  text("SEEK",210, 600);
+
+  text("HIDE",990, 500);
+  text("and",1020, 550);
+  text("SEEK",1050, 600);
+
 // walls
 //   left wall
   for (let i=0; i<height; i+= wall_1.height)
@@ -747,13 +786,13 @@ for (let i=0; i<width; i+= wall_1.width)
 {
   image(wall_7,i, height-wall_6.height/2);
 }
-  
+
 //   corners
   image(wall_1,wall_1.width/2,wall_1.height/2);
   image(wall_5,width-wall_5.width/2,height-wall_5.height/2);
   image(wall_3,width-wall_3.width/2,wall_3.height/2);
   image(wall_2,wall_2.width/2,height-wall_2.height/2);
-  
+
   // draw room divisions
   rectMode(CORNER);
   noStroke();
@@ -815,6 +854,25 @@ function seeker(){
   imageMode(CENTER);
   background("#7a8786"); 
   imageMode(CENTER);
+
+  // draw placeholder rooms
+  rectMode(CORNER);
+  noStroke();
+  fill("#201E1F");
+  rect(0,height/2,width/3,height/2);
+  rect((width/3)*2,height/2,width/3,height/2);
+
+  textFont("VT323"); 
+  textSize(50);
+  fill("white");
+
+  text("HIDE",150, 500);
+  text("and",180, 550);
+  text("SEEK",210, 600);
+
+  text("HIDE",990, 500);
+  text("and",1020, 550);
+  text("SEEK",1050, 600);
 
 // walls
 //   left wall
