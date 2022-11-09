@@ -73,6 +73,10 @@ let sofa;
 let tv;
 let sofa_side;
 let rug;
+let dining_table;
+let dining_table_chair_1;
+let dining_table_chair_2;
+let dining_table_chair_3;
 
 let plant_obj_room2;
 let plant_obj_room1;
@@ -88,6 +92,11 @@ let bed_obj_2_room3;
 let bed_obj_room3;
 let tv_room3;
 let sofa_room3;
+
+let dining_table_obj_room4;
+let chair_obj_1;
+let chair_obj_2;
+let chair_obj_3;
 
 let check;
 let sides;
@@ -150,6 +159,11 @@ function preload() {
   tv = loadImage("imgs/objects_house_0021_Layer-22.png")
   sofa_side = loadImage("imgs/objects_house_0003_Layer-4.png")
   rug = loadImage("imgs/rug.png")
+  dining_table = loadImage("imgs/objects_house_0044_Layer-45.png");
+  dining_table_chair_1= loadImage("imgs/objects_house_0014_Layer-15.png");
+  dining_table_chair_2= loadImage("imgs/2objects_house_0014_Layer-15.png");
+  dining_table_chair_3= loadImage("imgs/3objects_house_0014_Layer-15.png");
+
 
   wall_1 = loadImage("imgs/walls/walls_0043_Layer-44.png");
   wall_2 = loadImage("imgs/walls/walls_0044_Layer-45.png");
@@ -211,8 +225,8 @@ function setup() {
   // room 2
   plant_obj_room2 = new furniture("plant in living room",plant,800,70);
   table_obj_room2 = new furniture("table in living room",table,650,330);
-  Sofa_chair_obj_room2 = new furniture("Sofa chair 1 in living room",Sofa_chair,570,200);
-  Sofa_chair_obj2_room2 = new furniture("Sofa chair 2 in living room",Sofa_chair,700,150);
+  Sofa_chair_obj_room2 = new furniture("Sofa chair 1 in living room",Sofa_chair,530,160);
+  Sofa_chair_obj2_room2 = new furniture("Sofa chair 2 in living room",Sofa_chair_2,730,160);
   sofa_obj_room2 = new furniture("sofa in living room",sofa,630,60);
   rug_room2 = new furniture("rug in guest room",rug,630,140);
 
@@ -222,7 +236,11 @@ function setup() {
   tv_room3 = new furniture("Tv in guest room",tv,830,450)
   sofa_room3 = new furniture("sofa in guest room",sofa_side,750,450)
 
-
+  // room 4
+  dining_table_obj_room4 = new furniture("dining table",dining_table, 1090,150);
+  chair_obj_1 = new furniture("dining chair",dining_table_chair_1, 1060,80);
+  chair_obj_2 = new furniture("dining chair",dining_table_chair_2, 965,150);
+  chair_obj_3 = new furniture("dining chair",dining_table_chair_3, 1200,180);
 
   // room 3
   // plant_obj_room2 = new furniture("plant",plant,800,70);
@@ -245,8 +263,8 @@ function setup() {
 function draw() {
   print(mouseX,mouseY);
   if(state == "start"){
-      // start()
-      hider() 
+      start()
+      // hider() 
     }
   else if (state == "waiting")
   {
@@ -576,7 +594,23 @@ image(wall_7,i, height-wall_6.height/2);
   image(wall_5,width-wall_5.width/2,height-wall_5.height/2);
   image(wall_3,width-wall_3.width/2,wall_3.height/2);
   image(wall_2,wall_2.width/2,height-wall_2.height/2);
-  
+
+  // draw room divisions
+  rectMode(CORNER);
+  noStroke();
+  fill("#403124");
+  rect(0,height/2, width,10);
+  rect(width/3,0, 10,height);
+  rect((width/3)*2,0, 10,height);
+
+  // door openings
+  fill("#7a8786")
+  rect((width/3)*2-1,200, 12,100);
+  rect((width/3)-1,200, 12,100);
+  rect((width/3)-1,550, 12,100);
+  rect((width/3)*2-1,550, 12,100);
+  rect(width-300,height/2-1, 100,12);
+
 //   draw the furniture
   // room 1
   plant_obj_room1.draw();
@@ -597,6 +631,12 @@ image(wall_7,i, height-wall_6.height/2);
   tv_room3.draw();
   sofa_room3.draw();
   rug_room2.draw();
+
+  // room 4
+  dining_table_obj_room4.draw();
+  chair_obj_1.draw();
+  chair_obj_2.draw();
+  chair_obj_3.draw();
 
   // P_2.x_pos=seeker_x;
   // P_2.y_pos=seeker_y;
@@ -672,41 +712,48 @@ for (let i=0; i<width; i+= wall_1.width)
   image(wall_3,width-wall_3.width/2,wall_3.height/2);
   image(wall_2,wall_2.width/2,height-wall_2.height/2);
   
-// draw room divisions
-noStroke();
-fill("#403124");
-rect(0,height/2, width,10);
-rect(width/3,0, 10,height);
-rect((width/3)*2,0, 10,height);
+  // draw room divisions
+  rectMode(CORNER);
+  noStroke();
+  fill("#403124");
+  rect(0,height/2, width,10);
+  rect(width/3,0, 10,height);
+  rect((width/3)*2,0, 10,height);
 
-// door openings
-fill("#7a8786")
-rect((width/3)*2-1,200, 12,100);
-rect((width/3)-1,200, 12,100);
-rect((width/3)-1,550, 12,100);
-rect((width/3)*2-1,550, 12,100);
-rect(width-300,height/2-1, 100,12);
+  // door openings
+  fill("#7a8786")
+  rect((width/3)*2-1,200, 12,100);
+  rect((width/3)-1,200, 12,100);
+  rect((width/3)-1,550, 12,100);
+  rect((width/3)*2-1,550, 12,100);
+  rect(width-300,height/2-1, 100,12);
 
 //   draw the furniture
- // room 1
- plant_obj_room1.draw();
- side_tableObj_1_room1.draw();
- side_tableObj_2_room1.draw();
- bed_obj_room1.draw();
- 
- // room 2
- sofa_obj_room2.draw();
- plant_obj_room2.draw();
- table_obj_room2.draw();
- Sofa_chair_obj_room2.draw();
- Sofa_chair_obj2_room2.draw();
+  // room 1
+  plant_obj_room1.draw();
+  side_tableObj_1_room1.draw();
+  side_tableObj_2_room1.draw();
+  bed_obj_room1.draw();
+  
+  // room 2
+  sofa_obj_room2.draw();
+  plant_obj_room2.draw();
+  table_obj_room2.draw();
+  Sofa_chair_obj_room2.draw();
+  Sofa_chair_obj2_room2.draw();
 
- // room 3
- bed_obj_room3.draw();
- bed_obj_2_room3.draw();
- tv_room3.draw();
- sofa_room3.draw();
- rug_room2.draw();
+  // room 3
+  bed_obj_room3.draw();
+  bed_obj_2_room3.draw();
+  tv_room3.draw();
+  sofa_room3.draw();
+  rug_room2.draw();
+
+  // room 4
+  dining_table_obj_room4.draw();
+  chair_obj_1.draw();
+  chair_obj_2.draw();
+  chair_obj_3.draw();
 
   if (role == "hider")
   {
@@ -756,8 +803,24 @@ image(wall_7,i, height-wall_6.height/2);
   image(wall_1,wall_1.width/2,wall_1.height/2);
   image(wall_5,width-wall_5.width/2,height-wall_5.height/2);
   image(wall_3,width-wall_3.width/2,wall_3.height/2);
-    image(wall_2,wall_2.width/2,height-wall_2.height/2);
-  
+  image(wall_2,wall_2.width/2,height-wall_2.height/2);
+
+// draw room divisions
+rectMode(CORNER);
+noStroke();
+fill("#403124");
+rect(0,height/2, width,10);
+rect(width/3,0, 10,height);
+rect((width/3)*2,0, 10,height);
+
+// door openings
+fill("#7a8786")
+rect((width/3)*2-1,200, 12,100);
+rect((width/3)-1,200, 12,100);
+rect((width/3)-1,550, 12,100);
+rect((width/3)*2-1,550, 12,100);
+rect(width-300,height/2-1, 100,12);
+
 //   draw the furniture
   // room 1
  plant_obj_room1.draw();
@@ -778,6 +841,12 @@ image(wall_7,i, height-wall_6.height/2);
  tv_room3.draw();
  sofa_room3.draw();
  rug_room2.draw();
+
+  // room 4
+  dining_table_obj_room4.draw();
+  chair_obj_1.draw();
+  chair_obj_2.draw();
+  chair_obj_3.draw();
 
   P_2.draw();
   
@@ -892,7 +961,7 @@ class Player{
   
   check_in_Bound(){
     
-    if (sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_2_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  bed_obj_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || sofa_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || rug_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) )
+    if (sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_2_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  bed_obj_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || sofa_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||  tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || rug_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || dining_table_obj_room4.checkBound(this.x_pos,this.y_pos,this.width, this.height) || chair_obj_2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || chair_obj_1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || chair_obj_3.checkBound(this.x_pos,this.y_pos,this.width, this.height))
     {
       return true;
     }
@@ -918,6 +987,12 @@ class Player{
   tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   sofa_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   rug_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height)
+
+  // room 4
+  dining_table_obj_room4.checkBound(this.x_pos,this.y_pos,this.width, this.height)
+  chair_obj_1.checkBound(this.x_pos,this.y_pos,this.width, this.height)
+  chair_obj_2.checkBound(this.x_pos,this.y_pos,this.width, this.height)
+  chair_obj_3.checkBound(this.x_pos,this.y_pos,this.width, this.height)
 
   this.move();
   // rect(this.x_pos,this.y_pos,this.width,this.height);
@@ -1130,20 +1205,37 @@ class furniture{
     imageMode(CENTER);
     rectMode(CENTER);
     noFill();
-    if (role =="hider")
+    this.checkBound(P_1.get_x(),P_1.get_y(),P_1.get_w(),P_1.get_h());
+    if (this.color != "NONE")
       {
-        this.checkBound(P_1.get_x(),P_1.get_y(),P_1.get_w(),P_1.get_h());
+        stroke(this.color);
+        fill(this.color)
       }
     else{
-      this.checkBound(P_2.get_x(),P_2.get_y(),P_2.get_w(),P_2.get_h());
+      noStroke();
+      noFill();
     }
-    
-    
-    stroke(this.color);
-    fill(this.color)
     rect(this.x,this.y,this.w,this.h);
     image(this.img,this.x,this.y,this.w,this.h);
-    this.color = "#7a8786";
+    this.color = "NONE";
+
+    // imageMode(CENTER);
+    // rectMode(CENTER);
+    // noFill();
+    // if (role =="hider")
+    //   {
+    //     this.checkBound(P_1.get_x(),P_1.get_y(),P_1.get_w(),P_1.get_h());
+    //   }
+    // else{
+    //   this.checkBound(P_2.get_x(),P_2.get_y(),P_2.get_w(),P_2.get_h());
+    // }
+    
+    
+    // stroke(this.color);
+    // fill(this.color)
+    // rect(this.x,this.y,this.w,this.h);
+    // image(this.img,this.x,this.y,this.w,this.h);
+    // this.color = "#7a8786";
   }
   
   checkBound(x,y,w,h){
