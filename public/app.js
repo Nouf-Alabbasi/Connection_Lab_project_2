@@ -250,7 +250,7 @@ function setup() {
   // sofa_obj_room2 = new furniture("sofa",sofa,630,60);
   
   //creating button obj
-  start_btn = new BUTTON("start", width/2,height/2+30);
+  start_btn = new BUTTON("start", width/2,height/2+60);
   // temp_btn = new BUTTON("2players_in", 50,10);
   
   textFont("VT323"); 
@@ -263,7 +263,8 @@ function setup() {
 function draw() {
   print(mouseX,mouseY);
   if(state == "start"){
-      start()
+      // start()
+      waiting_page();
       // hider() 
     }
   else if (state == "waiting")
@@ -430,7 +431,7 @@ function start(){
   rect(0,0,width,height);
 
   textFont("VT323"); 
-  textSize(50);
+  textSize(100);
   fill("white");
   let Text = "HIDE and SEEK";
   text(Text,width/2-textWidth(Text)/2, height/2);
@@ -468,7 +469,7 @@ function waiting_page(){
   fill("black");
   rect(0,0,width,height);
   
-  textSize(15);
+  textSize(30);
   fill("white");
   let Text = "waiting for a second player to join";
   text(Text,width/2-textWidth(Text)/2, height/4);
@@ -906,8 +907,8 @@ class BUTTON{
     this.y_pos = y_pos;
     textFont("monospace");
     textSize(15);
-    this.width_button = textWidth(this.text)+7;
-    this.height_button = 30;
+    this.width_button = textWidth(this.text)+85;
+    this.height_button = 60;
     this.d = dist(mouseX, mouseY, this.x_pos, this.y_pos);
   }
   
@@ -925,11 +926,11 @@ class BUTTON{
       cursor("default");
     }
 //     add button labels
-    textFont("monospace");
-    textSize(15);
+    textFont("VT323");
+    textSize(50);
     noStroke();
     fill("black")
-    text(this.text,this.x_pos-(this.width_button-10)/2,this.y_pos+(this.height_button/4));   
+    text(this.text,this.x_pos-(this.width_button-31)/2,this.y_pos+(this.height_button/4));   
   }
   
   InRange(){
