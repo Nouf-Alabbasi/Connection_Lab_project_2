@@ -44,7 +44,7 @@ let socket;
   let won;
   let P_2;
   let sofa_obj;
-  
+  let hid=false;
   let sprites_1 =[];
   let sprites_2 =[];
   let spritesheet_1;
@@ -184,6 +184,7 @@ let socket;
     }
     else if (state == "start_game")
     {
+      hid=false;
       print(hide_time);
       if (role == "hider"){
         hider() 
@@ -205,8 +206,6 @@ let socket;
   function mouseClicked() {
     if(start_btn.InRange()){
       state = "waiting";
-      
-
         socket = io();
         socket.on('connect', () => {
             console.log("connection established to server");
@@ -222,6 +221,7 @@ let socket;
 
         socket.on('set_hiding_place',(data)=>{
           hiding_place=data;
+          hid=true;
         })
 
         socket.on('end_screen',(data)=>{
@@ -300,6 +300,7 @@ let socket;
     let word = won?'won':'lost';
     Text=`You have ${word} the game!`
     text(Text,width/2-textWidth(Text)/2, height/2+50);
+    socket.disconnect();
     noLoop();
   }
   
@@ -391,12 +392,19 @@ let socket;
     fill("white");
     let role_text = "You are the: "+role;
     text(role_text,width/2-textWidth(role_text)/2, 100);
-    
-    if (frameCount-stop_time>280)
+    if (role=='seeker'){
+      wait_text = "waiting for the hider to hide"
+      textSize(20);
+      text(wait_text,width/2-textWidth(wait_text)/2, 150);
+    }
+
+    if ((frameCount-stop_time>280 && role=='hider') || (role=='seeker' && hid))
     {
       state = "start_game"
       hide_time = frameCount;
     }
+
+
   }
   
   function hidden(){
