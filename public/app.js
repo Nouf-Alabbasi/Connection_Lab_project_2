@@ -93,6 +93,9 @@ let num_searched_places = 0;
 let max_num_searches = 3;
 let hide_time = 0;
 let max_hide_time = 600;
+let winSound;
+let missHitSound;
+let lossSound;
 
 
 
@@ -121,6 +124,10 @@ function preload() {
   wall_5 = loadImage("imgs/walls/walls_0047_Layer-48.png");
   wall_6 = loadImage("imgs/walls/walls_0048_Layer-49.png");
   wall_7 = loadImage("imgs/walls/walls_0049_Layer-50.png");
+
+  winSound = loadSound('sound/win.mp3')
+  lossSound = loadSound('sound/lost.wav')
+  missHitSound = loadSound('sound/miss-hit.wav')
 }
 
 function setup() {
@@ -262,11 +269,13 @@ function mouseClicked() {
         if (data==role){
           console.log('win!!!')
           won = true;
+          winSound.play();
           state='end';
         }
         else{
           console.log('lost!!')
           won=false;
+          lossSound.play();
           state='end';
         }
       })
@@ -316,6 +325,7 @@ function keyPressed() {
             }
             else{
               center_pg_popup("no one is hiding here");
+              missHitSound.play();
             }
         }
     }
