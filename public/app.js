@@ -38,7 +38,7 @@ let socket;
 // implement door and move from one room to another 
 // think about the theme and design
 
-
+let stop=false;
 
 let P_1;
 let won;
@@ -83,6 +83,8 @@ let player_num = 0;
 let role = "seeker";
 let found = false;
 let clicked = false;
+let pop_up_start = 0;
+let pop_up_end = 500;
 
 let state = "start";
 let hiding_place = "bed";
@@ -92,6 +94,14 @@ let max_num_searches = 3;
 let hide_time = 0;
 let max_hide_time = 600;
 
+
+
+
+function delay(milliseconds){
+  return new Promise(resolve => {
+      setTimeout(resolve, milliseconds);
+  });
+}
 function preload() {
 //   sprites by @ScissorMarks 
   spritesheet_1 = loadImage("imgs/DinoSprites-doux.png");
@@ -114,7 +124,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1280, 720);
   background("#7a8786"); 
   wall_1.resize(wall_1.width *0.25, 0);
   wall_2.resize(wall_2.width *0.25, 0);
@@ -208,11 +218,19 @@ function draw() {
     //print("end");  
     end();
   }
+  // else if (state == "pop_up_seeker")
+  // {
+  //   center_pg_popup("no one is hiding here","show");
+  // }
+  // else if (state == "resume_after_popup")
+  // {
+  //   center_pg_popup("no one is hiding here","hide");
+  // }
   
 }//end of draw function
 
 function mouseClicked() {
-  if(start_btn.InRange()){
+  if(start_btn.InRange() && state =="start"){
     state = "waiting";
       socket = io();
       socket.on('connect', () => {
@@ -258,7 +276,7 @@ function mouseClicked() {
   //   player_num = 2;
   // }
   
-  if(instructions_btn.InRange()){
+  if(instructions_btn.InRange() && state == "instructions"){
     state = "display role";
   }
   
@@ -267,33 +285,70 @@ function mouseClicked() {
 function keyPressed() {
   if (state =="start_game"){
     if (key == ' ') {
-        if (role =="hider")
+        if (role =="hider" && P_1.check_in_Bound())
           {
             state = "hidden";
             socket.emit('hide',hiding_place);
         }
-        else if (role =="seeker"){
+        // else if (stop){
+        //   loop();
+        //   stop = false;
+        // }
+        else if (role =="seeker" && P_2.check_in_Bound()){
             num_searched_places+=1;
             //fix a small bug
             if (found){//search_place == hiding_place){
               socket.emit('end',role);
             }
-            if (num_searched_places > max_num_searches)
+            if (num_searched_places >= max_num_searches)
             {
               socket.emit('end',"hider");
             }
             print("num: ",num_searched_places);
             
+
+            // pop_up_start = frameCount;
+            if (search_place == hiding_place)
+            {
+              found = true;
+              //state = "end";
+              socket.emit('end',role);
+            }
+            else{
+              center_pg_popup("no one is hiding here");
+            }
         }
     }
   }
+
+  // else{
+  //   if (search_place == hiding_place)
+  //   {
+  //     found = true;
+  //     //state = "end";
+  //     socket.emit('end',role);
+  //   }
+  //   else{
+  //     // center_pg_popup("no one is hiding here");
+  //     // let current_time = pop_up_start;
+  //     popup("no one is hiding here");
+  //     // while (!(current_time-pop_up_start > pop_up_end))
+  //     // {
+  //     //   print("start time", pop_up_start, "currect frameCount", frameCount, "subtraction", current_time-pop_up_start)
+  //     //   center_pg_popup("no one is hiding here");
+  //     //   print(frameCount);
+  //     //   current_time+=1;
+  //     // }
+  //   }
+  // }
+
 }
 
 
 function start(){
   rectMode(CORNER);
   fill("black");
-  rect(0,0,height,width);
+  rect(0,0,width,height);
 
   textFont("VT323"); 
   textSize(50);
@@ -329,6 +384,7 @@ let Second_line = "";
 let stop_time = 1000000;
 
 function waiting_page(){
+  cursor("default");
   rectMode(CORNER);
   fill("black");
   rect(0,0,height,width);
@@ -387,7 +443,7 @@ function instructions(){
   rectMode(CORNER);
   fill("black");
   rect(0,0,height,width)
-  
+
   textFont("VT323"); 
   textSize(25);
   fill("white");
@@ -474,7 +530,7 @@ function hider_hidden(){
   textFont("VT323"); 
   textSize(20);
   fill("white");
-  let timer = "number of searched places " + (num_searched_places);
+  let timer = "Seeker's view";
   text(timer, wall_4.width,20);
 
 
@@ -497,6 +553,7 @@ function hidden(){
 }
 
 function hider(){
+
   if (frameCount-hide_time > max_hide_time)
   {
     state = "hidden";
@@ -551,7 +608,7 @@ function hider(){
     textFont("VT323"); 
     textSize(20);
     fill("white");
-    let timer = "time: " + int((frameCount-hide_time)/60);
+    let timer = "time: " + int((frameCount-hide_time)/60)+"/"+int(max_hide_time/60);
     text(timer, wall_4.width,20);
   }
   else{
@@ -563,7 +620,7 @@ function seeker(){
   imageMode(CENTER);
   background("#7a8786"); 
   imageMode(CENTER);
-  
+
 // walls
 //   left wall
   image(wall_4,wall_4.width/2,wall_1.height*1.5);
@@ -608,7 +665,7 @@ function seeker(){
   textFont("VT323"); 
   textSize(20);
   fill("white");
-  let timer = "number of searched places " + (num_searched_places);
+  let timer = "number of searched places " + (num_searched_places)+"/"+max_num_searches;
   text(timer, wall_4.width,20);
 }
 
@@ -630,6 +687,28 @@ function popup(Text)
   noStroke();
   rectMode(CENTER);
   
+}
+
+async function center_pg_popup(Text)
+{
+  textFont("VT323"); 
+  textSize(20);
+  fill("#394747");
+  width_title = textWidth(Text);
+  height_title = textAscent(Text)+textDescent(Text);
+  rectMode(CENTER);
+  // rect(width-width_title-50, height - 50, width_title,width_title);
+  rect(width/2,height/2,width_title+10,height_title+20);
+  
+  fill("white");
+  text(Text,width/2-width_title/2,height/2+height_title/4);
+  noFill();
+  noStroke();
+  rectMode(CENTER);
+  // stop = true;
+  noLoop();
+  await delay(500);
+  loop()
 }
 
 class BUTTON{
@@ -692,6 +771,16 @@ class Player{
     this.spectator=false;
   }
   
+  check_in_Bound(){
+    
+    if (sofa_obj.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_table_obj_1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_table_obj_2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||Sofa_chair_obj.checkBound(this.x_pos,this.y_pos,this.width, this.height))
+    {
+      return true;
+    }
+      
+
+  }
+
   draw(){
   sofa_obj.checkBound(this.x_pos,this.y_pos,this.width, this.height);
     
@@ -950,19 +1039,15 @@ class furniture{
           if (!keyIsDown(32))
           {
               popup("click space to search here"); 
+              // pop_up_start = frameCount;
           }
-          else{
-            if (search_place == hiding_place)
-            {
-              found = true;
-              //state = "end";
-              socket.emit('end',role);
-            }
-            else{
-              popup("no one is hiding here");
-            }
+          else if (hiding_place != search_place)
+          {
+            center_pg_popup("no one is hiding here");
+            
           }
         }
+        return true;
     }
   }
 
