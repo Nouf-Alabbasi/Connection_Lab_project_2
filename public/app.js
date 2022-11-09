@@ -66,8 +66,10 @@ let plant;
 let side_table;
 let table;
 let bed;
+let single_bed;
 let Sofa_chair;
 let sofa;
+let tv;
 
 let plant_obj_room2;
 let side_tableObj_1_room1;
@@ -77,7 +79,8 @@ let bed_obj_room1;
 let Sofa_chair_obj_room2;
 let Sofa_chair_obj2_room2;
 let sofa_obj_room2;
-
+let bed_obj_room3;
+let tv_room3;
 let check;
 let sides;
 let wall_1;
@@ -132,6 +135,10 @@ function preload() {
   bed = loadImage("imgs/objects_house_0035_Layer-36.png");
   Sofa_chair = loadImage("imgs/objects_house_0013_Layer-14-1.png");
   sofa = loadImage("imgs/objects_house_0004_Layer-5.png");
+  // single_bed = loadImage("imgs/objects_house_0004_Layer-5.png");
+  // tv = loadImage("imgs/objects_house_0004_Layer-5.png");
+  single_bed = loadImage("img/objects_house_0038_Layer-39.png")
+  tv = loadImage("img/objects_house_0021_Layer-22.png")
 
   wall_1 = loadImage("imgs/walls/walls_0043_Layer-44.png");
   wall_2 = loadImage("imgs/walls/walls_0044_Layer-45.png");
@@ -185,17 +192,20 @@ function setup() {
 //   creating the furniture obj
 
   // room 1
-  side_tableObj_1_room1 = new furniture("side_table_1",side_table,(200+bed.width/6)+50, 80);
-  side_tableObj_2_room1 = new furniture("side_table_2", side_table, 100 ,80);
-  bed_obj_room1 = new furniture("bed",bed,230,120);
+  side_tableObj_1_room1 = new furniture("side table 1 bedroom",side_table,(200+bed.width/6)+50, 80);
+  side_tableObj_2_room1 = new furniture("side table 2 bedroom", side_table, 100 ,80);
+  bed_obj_room1 = new furniture("bed in bedroom",bed,230,120);
 
   // room 2
-  plant_obj_room2 = new furniture("plant",plant,800,70);
-  table_obj_room2 = new furniture("table",table,650,330);
-  Sofa_chair_obj_room2 = new furniture("Sofa_chair",Sofa_chair,570,150);
-  Sofa_chair_obj2_room2 = new furniture("Sofa_chair",Sofa_chair,700,150);
-  sofa_obj_room2 = new furniture("sofa",sofa,630,60);
+  plant_obj_room2 = new furniture("plant in living room",plant,800,70);
+  table_obj_room2 = new furniture("table in living room",table,650,330);
+  Sofa_chair_obj_room2 = new furniture("Sofa chair 1 in living room",Sofa_chair,570,150);
+  Sofa_chair_obj2_room2 = new furniture("Sofa chair 2 in living room",Sofa_chair,700,150);
+  sofa_obj_room2 = new furniture("sofa in living room",sofa,630,60);
 
+  // room 3
+  bed_obj_room3 = new furniture("bed in guest room",single_bed,630,500);
+  tv_room3 = new furniture("Tv in guest room",tv,630,500)
   // room 3
   // plant_obj_room2 = new furniture("plant",plant,800,70);
   // table_obj_room2 = new furniture("table",table,650,330);
@@ -550,6 +560,7 @@ image(wall_7,i, height-wall_6.height/2);
   image(wall_2,wall_2.width/2,height-wall_2.height/2);
   
 //   draw the furniture
+  // room 1
   sofa_obj_room2.draw();
   plant_obj_room2.draw();
   side_tableObj_1_room1.draw();
@@ -557,8 +568,14 @@ image(wall_7,i, height-wall_6.height/2);
   table_obj_room2.draw();
   bed_obj_room1.draw();
   
+  // room 2
   Sofa_chair_obj_room2.draw();
   Sofa_chair_obj2_room2.draw();
+
+  // room 3
+  bed_obj_room3.draw();
+  tv_room3.draw();
+
   // P_2.x_pos=seeker_x;
   // P_2.y_pos=seeker_y;
   P_2.spectator=true;
@@ -649,6 +666,7 @@ rect((width/3)*2-1,550, 12,100);
 rect(width-300,height/2-1, 100,12);
 
 //   draw the furniture
+  // room 1
   sofa_obj_room2.draw();
   plant_obj_room2.draw();
   side_tableObj_1_room1.draw();
@@ -656,8 +674,14 @@ rect(width-300,height/2-1, 100,12);
   table_obj_room2.draw();
   bed_obj_room1.draw();
   
+  // room 2
   Sofa_chair_obj_room2.draw();
   Sofa_chair_obj2_room2.draw();
+
+  // room 3
+  bed_obj_room3.draw();
+  tv_room3.draw();
+
 
   if (role == "hider")
   {
@@ -710,6 +734,7 @@ image(wall_7,i, height-wall_6.height/2);
     image(wall_2,wall_2.width/2,height-wall_2.height/2);
   
 //   draw the furniture
+  // room 1
   sofa_obj_room2.draw();
   plant_obj_room2.draw();
   side_tableObj_1_room1.draw();
@@ -717,8 +742,14 @@ image(wall_7,i, height-wall_6.height/2);
   table_obj_room2.draw();
   bed_obj_room1.draw();
   
+  // room 2
   Sofa_chair_obj_room2.draw();
   Sofa_chair_obj2_room2.draw();
+
+  // room 3
+  bed_obj_room3.draw();
+  tv_room3.draw();
+  
   P_2.draw();
   
 
@@ -832,7 +863,7 @@ class Player{
   
   check_in_Bound(){
     
-    if (sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height))
+    if (sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) ||side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height) || bed_obj_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height) || tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height))
     {
       return true;
     }
@@ -841,17 +872,18 @@ class Player{
   }
 
   draw(){
-  sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
-    
-  plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   side_tableObj_1_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   side_tableObj_2_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height);
-    
-  table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
-    
   bed_obj_room1.checkBound(this.x_pos,this.y_pos,this.width, this.height);
-  Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
+    
+  sofa_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
+  plant_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
+  table_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);  Sofa_chair_obj_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   Sofa_chair_obj2_room2.checkBound(this.x_pos,this.y_pos,this.width, this.height)
+
+  // room 3
+  bed_obj_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
+  tv_room3.checkBound(this.x_pos,this.y_pos,this.width, this.height);
   this.move();
   // rect(this.x_pos,this.y_pos,this.width,this.height);
   
