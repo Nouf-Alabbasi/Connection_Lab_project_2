@@ -15,6 +15,9 @@ let no_of_connections = 0;
 io.on('connect', (socket) => {
     console.log('New Connection:', socket.id);
     no_of_connections++;
+    if (no_of_connections > 2) {
+        socket.emit('not_implemented', socket.id);
+    }
     if (no_of_connections == 1) {
         socket.role = "seeker";
     }

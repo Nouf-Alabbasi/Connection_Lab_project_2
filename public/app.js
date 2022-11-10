@@ -328,6 +328,11 @@ function mouseClicked() {
           console.log(role);
       })
 
+      socket.on('not_implemented',(data)=>{
+        window.alert('2 players are already playing, please wait and refresh!');
+        socket.disconnect();
+      })
+
       socket.on('start',(data)=>{
         player_num=2;
         console.log(data);
