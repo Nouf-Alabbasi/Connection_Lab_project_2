@@ -593,7 +593,7 @@ function instructions(){
   
 }
 
-function display_role(){
+async function display_role(){
   cursor("default");
   rectMode(CORNER);
   fill("black");
@@ -609,7 +609,7 @@ function display_role(){
     textSize(40);
     text(wait_text,width/2-textWidth(wait_text)/2, 370);
   }
-
+  await delay(700);
   if ((frameCount-stop_time>100 && role=='hider') || (role=='seeker' && hid))
   {
     state = "start_game"
