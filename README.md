@@ -21,8 +21,8 @@ We then created the wireframes. This helped us visualize the project and the sto
 <!-- ![wireframe](readme_imgs/wireframe.png) -->
 
 #### ⭕️ front end (design)
-We decided that the game was going to be a p5js game. Our first draft was one room with a player with basic functionality and elements (popups, movement, hiding...)
-[Initial one player room](https://editor.p5js.org/Nouf-Alabbasi/sketches/SaNU4HA9x)
+We decided that the game was going to be a p5js game. Our first draft was one room with a player with basic functionality and elements (popups, movement, hiding...)<br>
+[Initial one player room](https://editor.p5js.org/Nouf-Alabbasi/sketches/SaNU4HA9x)<br>
 Once we tested that this works as intended, we moved on to create the seeker's version. using functions and classes made this steps a little easier. After testing we then moved on to creating the start, instruction and end pages. This was changed a little after testing but the main functionalities remained the same. We now had a game that has a hider and seeker views and the functionalities for both sides, however they are not connected yet. In the next section we talk about the backend, but as for the front end, after adding the sockets we expanded the eviroment to add more hiding places and rooms.
 
 #### backend end
