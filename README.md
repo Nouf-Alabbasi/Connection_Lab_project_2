@@ -26,7 +26,7 @@ some of the potential next steps include:
 * Adding hints of some sort (hot an cold, or letting the hider peep out... etc)
 * Adding a restart mechanism
 * Adding more players
-* adding more rooms or levels
+* adding rooms (sockets)
 * fixing some minor bugs
 
 ## relevant references/resources that were utilized
