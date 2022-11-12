@@ -1,17 +1,21 @@
 # Connection_Lab_project_2
+## [project Link](https://melted-sun-one.glitch.me/)
+##
+##
+##
 
 ## production decisions (i.e. technical, design, conceptual, creative etc)
-#### planning
+#### ⭕️ planning
 <!--- (wireframe + fleshing out the idea and it's details) --->
 <!--- (how we made sure to note down the overall steps, and made lists with bugs we encountered and any new steps that we thought were necessary after we started building the projecct) --->
 
-#### front end (design)
+#### ⭕️ front end (design)
 <!--- creating one player first to make sure all the fucntionalities are there --->
 [Initial one player room](https://editor.p5js.org/Nouf-Alabbasi/sketches/SaNU4HA9x)
 
 #### backend end
 
-## influences and inspiration
+## ⭕️ influences and inspiration
 
 ## challenges and solutions
 <!--- 
@@ -20,7 +24,7 @@ Maintaining the seeker's view
 adding all the things that make the game intuitive to the user
   we can also talk about user testing somewhere and how we made changes to the game to according to what we found out --->
 
-## overall lessons learned
+## overall lessons learned (maybe this should be in the individual paragraphs?
 
 ## potential next steps
 some of the potential next steps include:
@@ -37,4 +41,4 @@ some of the potential next steps include:
 <!--- I think we write about our contributions and our experience ??)
 ### Hashim's paragraph
 
-### Nouf's pragraph
+### ⭕️ Nouf's pragraph
