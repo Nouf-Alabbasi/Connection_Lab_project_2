@@ -34,6 +34,9 @@ We were inspired by retro games. This is why we used the audio and visuals that 
 
 ## challenges and solutions
 delay
+creating delay in the game was specifically a challenge because of the use of p5js to create the game. In p5, the draw function runs 60 (default) times every second, this makes it so that setTimeout and setInterval may not work as well. This was then solved by creating a delay using promises and async functions. The delay function is created here:
+https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L147
+This stops all JavaScript code from continuing for the argument passed in milliseconds.
 Maintaining the seeker's view
 adding all the things that make the game intuitive to the user
   we can also talk about user testing somewhere and how we made changes to the game to according to what we found out 
