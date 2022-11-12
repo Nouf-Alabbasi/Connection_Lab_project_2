@@ -6,11 +6,23 @@
 
 ## production decisions (i.e. technical, design, conceptual, creative etc)
 #### ⭕️ planning
-<!--- (wireframe + fleshing out the idea and it's details) --->
-<!--- (how we made sure to note down the overall steps, and made lists with bugs we encountered and any new steps that we thought were necessary after we started building the projecct) --->
+we first noted down the details of our idea. We wanted to make sure we understand the target audience and the challenges that we must face. This would help us know what we would focus on and get a better idea of the design aspects.<br>
+We also made sure to note down the overall steps, and made lists with bugs we encountered and any new steps that we thought were necessary after we started building the projecct.
+This is an example of the inetial project idea notes. (we filled the gaps in our later meetings)
+<p align="left">
+  <img src="readme_imgs/idea_notes.png" width="350" title="hover text">
+</p>
+
+We then created the wireframes. This helped us visualize the project and the storyline and make sure that our visions align. Laying out the pages helped us when building the game becuase we have the pages and their order and the possible layout and needed elements for each page (buttons... etc) 
+<p align="left">
+  <img src="readme_imgs/wireframe.png" width="350" title="hover text">
+</p>
+
+<!-- ![wireframe](readme_imgs/wireframe.png) -->
 
 #### ⭕️ front end (design)
 <!--- creating one player first to make sure all the fucntionalities are there --->
+We decided that the game was going to be a p5js game. Our first draft was one room with a player with basic functionality and elements (popups, movement, hiding...)
 [Initial one player room](https://editor.p5js.org/Nouf-Alabbasi/sketches/SaNU4HA9x)
 
 #### backend end
