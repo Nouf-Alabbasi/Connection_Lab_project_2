@@ -21,13 +21,14 @@ We then created the wireframes. This helped us visualize the project and the sto
 <!-- ![wireframe](readme_imgs/wireframe.png) -->
 
 #### ⭕️ front end (design)
-<!--- creating one player first to make sure all the fucntionalities are there --->
 We decided that the game was going to be a p5js game. Our first draft was one room with a player with basic functionality and elements (popups, movement, hiding...)
 [Initial one player room](https://editor.p5js.org/Nouf-Alabbasi/sketches/SaNU4HA9x)
+Once we tested that this works as intended, we moved on to create the seeker's version. using functions and classes made this steps a little easier. After testing we then moved on to creating the start, instruction and end pages. This was changed a little after testing but the main functionalities remained the same. We now had a game that has a hider and seeker views and the functionalities for both sides, however they are not connected yet. In the next section we talk about the backend, but as for the front end, after adding the sockets we expanded the eviroment to add more hiding places and rooms.
 
 #### backend end
 
 ## ⭕️ influences and inspiration
+We were inspired by retro games. This is why we used the audio and visuals that we used. We picked to recreate hide and seek as an online game becuase we haven't seen it done before. We thought it would be an intresting challenge to try to take a game that everyone knows and recreate the thrill you feel while playing it in real life.
 
 ## challenges and solutions
 <!--- 
@@ -36,7 +37,7 @@ Maintaining the seeker's view
 adding all the things that make the game intuitive to the user
   we can also talk about user testing somewhere and how we made changes to the game to according to what we found out --->
 
-## overall lessons learned (maybe this should be in the individual paragraphs?
+## overall lessons learned (maybe this should be in the individual paragraphs?)
 
 ## potential next steps
 some of the potential next steps include:
@@ -47,10 +48,11 @@ some of the potential next steps include:
 * fixing some minor bugs
 
 ## relevant references/resources that were utilized
-
+* for the sprites and imgs we used a few game sites that provided game assets.
 
 ## individual paragraphs
-<!--- I think we write about our contributions and our experience ??)
-### Hashim's paragraph
+<!--- I think we write about our contributions and our experience ??)-->
+#### Hashim's paragraph
 
-### ⭕️ Nouf's pragraph
+#### ⭕️ Nouf's pragraph
+I really enjoyed working on this project. It was really cool to finally see the project running online with players on different players 
