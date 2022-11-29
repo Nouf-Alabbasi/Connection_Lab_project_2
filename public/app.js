@@ -1,50 +1,14 @@
-
-
-// let socket = io();
-// socket.on('connect', () => {
-//     console.log("connection established to server");
-// })
-
-
-// socket.on('start',(data)=>{
-//     player_num=2;
-//     console.log(data);
-// })
+// authors: Hashim and Nouf
+// this is am online 2 player hide and seek game created for connections lab fall 2023
 
 let socket;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// opt things that we can add(but will take more time):
-//let users select their char
-//collision with furniture instead of being able to walk over them
-
-// some things that need to be done
-// think about whether to show player 1 disappear then show you've hid screen
-// implement door and move from one room to another 
-// think about the theme and design
-
 let stop=false;
 
 let P_1;
 let won;
 let moveData;
 let P_2;
-// let sofa_obj_room2;
+
 let hid=false;
 let sprites_1 =[];
 let sprites_2 =[];
@@ -52,15 +16,6 @@ let spritesheet_1;
 let spritesheet_2;
 let w;
 let h;
-
-// side_tableObj_1_room1
-// side_tableObj_2_room1
-// bed_obj_room1
-// plant_obj_room2
-// table_obj_room2
-// Sofa_chair_obj_room2
-// Sofa_chair_obj2_room2
-// sofa_obj_room2
 
 let plant;
 let side_table;
@@ -120,9 +75,7 @@ let DarkRoom3;
 let DarkRoom4;
 
 let start_btn;
-// let temp_btn;
 let instructions_btn;
-// let start_game_btn;
 let player_num = 0;
 let role = "seeker";
 let found = false;
@@ -161,8 +114,6 @@ function preload() {
   Sofa_chair = loadImage("imgs/objects_house_0013_Layer-14-1.png");
   Sofa_chair_2 = loadImage("imgs/2objects_house_0013_Layer-14-1.png");
   sofa = loadImage("imgs/objects_house_0004_Layer-5.png");
-  // single_bed = loadImage("imgs/objects_house_0004_Layer-5.png");
-  // tv = loadImage("imgs/objects_house_0004_Layer-5.png");
   single_bed = loadImage("imgs/objects_house_0038_Layer-39.png")
   tv = loadImage("imgs/objects_house_0021_Layer-22.png")
   sofa_side = loadImage("imgs/objects_house_0003_Layer-4.png")
@@ -197,7 +148,7 @@ function setup() {
   wall_6.resize(wall_6.width *0.25, 0);
   wall_7.resize(wall_7.width *0.25, 0);
 
-//   prep sprite (maybe they can pick their char?)
+//   prep sprite
   spritesheet_1.resize(spritesheet_1.width *2.5, spritesheet_1.height *2.5);
   w = int(spritesheet_1.width /24);
   h = int(spritesheet_1.height);
@@ -261,7 +212,6 @@ function setup() {
   textFont("VT323"); 
   textSize(15);
   instructions_btn = new BUTTON("start game",width/2+(textWidth("instructions")/2)-35,height-100);
-  // start_game_btn = new BUTTON("start game",width-30,height/2+30 );
   
   // create dark rooms
   DarkRoom1 = new darkRoom((width/3)/2,height/4);
@@ -307,14 +257,7 @@ function draw() {
     //print("end");  
     end();
   }
-  // else if (state == "pop_up_seeker")
-  // {
-  //   center_pg_popup("no one is hiding here","show");
-  // }
-  // else if (state == "resume_after_popup")
-  // {
-  //   center_pg_popup("no one is hiding here","hide");
-  // }
+
   
 }//end of draw function
 
@@ -368,9 +311,6 @@ function mouseClicked() {
       })
 
   }
-  // if (temp_btn.InRange()){
-  //   player_num = 2;
-  // }
   
   if(instructions_btn.InRange() && state == "instructions"){
     state = "display role";
@@ -386,10 +326,7 @@ function keyPressed() {
             state = "hidden";
             socket.emit('hide',hiding_place);
         }
-        // else if (stop){
-        //   loop();
-        //   stop = false;
-        // }
+
         else if (role =="seeker" && P_2.check_in_Bound()){
             num_searched_places+=1;
             //fix a small bug
@@ -417,28 +354,6 @@ function keyPressed() {
         }
     }
   }
-
-  // else{
-  //   if (search_place == hiding_place)
-  //   {
-  //     found = true;
-  //     //state = "end";
-  //     socket.emit('end',role);
-  //   }
-  //   else{
-  //     // center_pg_popup("no one is hiding here");
-  //     // let current_time = pop_up_start;
-  //     popup("no one is hiding here");
-  //     // while (!(current_time-pop_up_start > pop_up_end))
-  //     // {
-  //     //   print("start time", pop_up_start, "currect frameCount", frameCount, "subtraction", current_time-pop_up_start)
-  //     //   center_pg_popup("no one is hiding here");
-  //     //   print(frameCount);
-  //     //   current_time+=1;
-  //     // }
-  //   }
-  // }
-
 }
 
 
@@ -490,8 +405,6 @@ function waiting_page(){
   fill("white");
   let Text = "waiting for a second player to join";
   text(Text,width/2-textWidth(Text)/2, height/4);
-  
-  // temp_btn.draw_button();
 
   if (player_num < 2)
   {
@@ -534,7 +447,6 @@ function waiting_page(){
     waiting_text = "Second Player is in!";
     fill("white");
     Second_line = "Game starting soon";
-    // text("Game starting soon",width/2-textWidth("Game starting soon")/2, height/2+30);
   }
   if (frameCount-stop_time > 60)
   {
@@ -587,7 +499,6 @@ function instructions(){
 
   fill("white");
   text(line_5,930, 280);
-  // text(line_4,width/2-textWidth(line_4)/2, 250);
 
   instructions_btn.draw_button();
   
@@ -724,35 +635,6 @@ image(wall_7,i, height-wall_6.height/2);
   rect((width/3)*2-1,550, 12,100);
   rect(width-300,height/2-1, 100,12);
 
-// //   draw the furniture
-//   // room 1
-//   plant_obj_room1.draw();
-//   side_tableObj_1_room1.draw();
-//   side_tableObj_2_room1.draw();
-//   bed_obj_room1.draw();
-  
-//   // room 2
-//   sofa_obj_room2.draw();
-//   plant_obj_room2.draw();
-//   table_obj_room2.draw();
-//   Sofa_chair_obj_room2.draw();
-//   Sofa_chair_obj2_room2.draw();
-
-//   // room 3
-//   bed_obj_room3.draw();
-//   bed_obj_2_room3.draw();
-//   tv_room3.draw();
-//   sofa_room3.draw();
-//   rug_room2.draw();
-
-//   // room 4
-//   dining_table_obj_room4.draw();
-//   chair_obj_1.draw();
-//   chair_obj_2.draw();
-//   chair_obj_3.draw();
-
-  // P_2.x_pos=seeker_x;
-  // P_2.y_pos=seeker_y;
   P_2.spectator=true;
   P_2.draw();
 
@@ -761,8 +643,6 @@ image(wall_7,i, height-wall_6.height/2);
   fill("white");
   let timer = "Seeker's view";
   text(timer, wall_4.width,20);
-
-
 }
 
 function hidden(){
@@ -968,79 +848,52 @@ function seeker(){
   text("and",1020, 550);
   text("SEEK",1050, 600);
 
-// walls
-//   left wall
-for (let i=0; i<height; i+= wall_1.height)
-{
-  image(wall_4,wall_4.width/2,i);
-}
+  // walls
+  //   left wall
+  for (let i=0; i<height; i+= wall_1.height)
+  {
+    image(wall_4,wall_4.width/2,i);
+  }
 
-//   right wall
-for (let i=0; i<height; i+= wall_1.height)
-{
-  image(wall_4,width-wall_4.width/2,i);
-}
+  //   right wall
+  for (let i=0; i<height; i+= wall_1.height)
+  {
+    image(wall_4,width-wall_4.width/2,i);
+  }
 
-//  top wall
-for (let i=0; i<width; i+= wall_1.width)
-{
-  image(wall_7,i, wall_7.height/2);
-}
+  //  top wall
+  for (let i=0; i<width; i+= wall_1.width)
+  {
+    image(wall_7,i, wall_7.height/2);
+  }
 
 
-//  bottom wall
-for (let i=0; i<width; i+= wall_1.width)
-{
-image(wall_7,i, height-wall_6.height/2);
-}
+  //  bottom wall
+  for (let i=0; i<width; i+= wall_1.width)
+  {
+  image(wall_7,i, height-wall_6.height/2);
+  }
 //   corners
   image(wall_1,wall_1.width/2,wall_1.height/2);
   image(wall_5,width-wall_5.width/2,height-wall_5.height/2);
   image(wall_3,width-wall_3.width/2,wall_3.height/2);
   image(wall_2,wall_2.width/2,height-wall_2.height/2);
 
-// draw room divisions
-rectMode(CORNER);
-noStroke();
-fill("#403124");
-rect(0,height/2, width,10);
-rect(width/3,0, 10,height);
-rect((width/3)*2,0, 10,height);
+  // draw room divisions
+  rectMode(CORNER);
+  noStroke();
+  fill("#403124");
+  rect(0,height/2, width,10);
+  rect(width/3,0, 10,height);
+  rect((width/3)*2,0, 10,height);
 
-// door openings
-fill("#7a8786")
-rect((width/3)*2-1,200, 12,100);
-rect((width/3)-1,200, 12,100);
-rect((width/3)-1,550, 12,100);
-rect((width/3)*2-1,550, 12,100);
-rect(width-300,height/2-1, 100,12);
-
-// //   draw the furniture
-//   // room 1
-//  plant_obj_room1.draw();
-//  side_tableObj_1_room1.draw();
-//  side_tableObj_2_room1.draw();
-//  bed_obj_room1.draw();
- 
-//  // room 2
-//  sofa_obj_room2.draw();
-//  plant_obj_room2.draw();
-//  table_obj_room2.draw();
-//  Sofa_chair_obj_room2.draw();
-//  Sofa_chair_obj2_room2.draw();
-
-//  // room 3
-//  bed_obj_room3.draw();
-//  bed_obj_2_room3.draw();
-//  tv_room3.draw();
-//  sofa_room3.draw();
-//  rug_room2.draw();
-
-//   // room 4
-//   dining_table_obj_room4.draw();
-//   chair_obj_1.draw();
-//   chair_obj_2.draw();
-//   chair_obj_3.draw();
+  // door openings
+  fill("#7a8786")
+  rect((width/3)*2-1,200, 12,100);
+  rect((width/3)-1,200, 12,100);
+  rect((width/3)-1,550, 12,100);
+  rect((width/3)*2-1,550, 12,100);
+  rect(width-300,height/2-1, 100,12);
 
   P_2.draw();
   
@@ -1191,13 +1044,10 @@ class Player{
     {
       return true;
     }
-      
 
   }
 
   draw(){
-    
-
     DarkRoom1.bound(this.x_pos,this.y_pos,this.width, this.height);
     DarkRoom2.bound(this.x_pos,this.y_pos,this.width, this.height);
     DarkRoom3.bound(this.x_pos,this.y_pos,this.width, this.height);
@@ -1451,24 +1301,6 @@ class furniture{
     rect(this.x,this.y,this.w,this.h);
     image(this.img,this.x,this.y,this.w,this.h);
     this.color = "NONE";
-
-    // imageMode(CENTER);
-    // rectMode(CENTER);
-    // noFill();
-    // if (role =="hider")
-    //   {
-    //     this.checkBound(P_1.get_x(),P_1.get_y(),P_1.get_w(),P_1.get_h());
-    //   }
-    // else{
-    //   this.checkBound(P_2.get_x(),P_2.get_y(),P_2.get_w(),P_2.get_h());
-    // }
-    
-    
-    // stroke(this.color);
-    // fill(this.color)
-    // rect(this.x,this.y,this.w,this.h);
-    // image(this.img,this.x,this.y,this.w,this.h);
-    // this.color = "#7a8786";
   }
   
   checkBound(x,y,w,h){
@@ -1504,43 +1336,3 @@ class furniture{
   }
 
 }
-
-
-
-
-// draft code:
-
-
-//       // player on the left (given x would be greater than this.x)
-//     if (x > this.x+this.w/2 &&  x < this.x+this.w/2+w/4)
-//     {
-// //     check that orange is greater than pink and smaller than green
-// //     check that the red is greater than the pink and smaller than the green
-//       if (y+h/4 < this.y +this.h/2 && y+h/4 >this.y-this.h/2 || y-h/4 < this.y +this.h/2 && y-h/4 >this.y-this.h/2 )
-//       {
-//         print("left")
-//         return "left";
-//       }
-//     }
-    
-// //     if obj to the right of player
-//     if (x+w/4 > this.x-this.w/2 &&  x+w/4 < this.x-this.w/2+w/4)
-//     {
-//       if (y+h/4 < this.y +this.h/2 && y+h/4 >this.y-this.h/2 || y-h/4 < this.y +this.h/2 && y-h/4 >this.y-this.h/2 )
-//       {
-//         print("right")
-//         return "right";
-//       }
-//     } 
-    
-    
-// // //     if obj to the top of player
-// //     if (x+w/4 > this.x-this.w/2 &&  x+w/4 < this.x+this.w/2)
-// //     {
-// //       if (y+h/4 < this.y +this.h/2 && y+h/4 >this.y-this.h/2 || y-h/4 < this.y +this.h/2 && y-h/4 >this.y-this.h/2 )
-// //       {
-// //         print("up")
-// //         return "up";
-// //       }
-// //     }
-
