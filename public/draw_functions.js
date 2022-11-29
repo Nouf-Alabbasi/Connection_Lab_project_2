@@ -165,7 +165,7 @@ async function display_role(){
 }
 //__________________________________________________________
 
-// ############################################ prepare furniture objects
+// ############################################ draw furniture objects
 function create_furn_obj(){
 	  // room 1
   side_tableObj_1_room1 = new furniture("side table 1 bedroom",side_table,(200+bed.width/6)+50, 80);
@@ -195,68 +195,9 @@ function create_furn_obj(){
 }
 //__________________________________________________________
 
-// ############################################ prepare sprite
-function prep_sprite(){
-	spritesheet_1.resize(spritesheet_1.width *2.5, spritesheet_1.height *2.5);
-	w = int(spritesheet_1.width /24);
-	h = int(spritesheet_1.height);
-
-	for (let y = 0; y <1 ; y++) {
-	sprites_1[y] = [];
-	for (let x = 0; x < 24; x++) {
-		sprites_1[y][x] = spritesheet_1.get(x * w, y * h, w, h);
-	} // iterate over rows
-	} // iterate over columns
-
-	spritesheet_2.resize(spritesheet_2.width *2.5, spritesheet_2.height *2.5);
-	w = int(spritesheet_2.width /24);
-	h = int(spritesheet_2.height);
-
-	for (let y = 0; y <1 ; y++) {
-	sprites_2[y] = [];
-	for (let x = 0; x < 24; x++) {
-		sprites_2[y][x] = spritesheet_2.get(x * w, y * h, w, h);
-	} // iterate over rows
-	} // iterate over columns
-
-	// // // // // 
-	P_2 = new Player(sprites_2);
-	P_1 = new Player(sprites_1);
-	sides = wall_4.width+7;
-}
-//__________________________________________________________
-
-function hidden(){
-  rectMode(CORNER);
-  fill("black");
-  rect(0,0,width,height)
-
-  textFont("VT323"); 
-  textSize(20);
-  fill("white");
-  let Text = "hiding place: " + hiding_place;
-  text(Text,width/2-textWidth(Text)/2, height/2);
-
-  textSize(15);
-  text("press return to restart",width/2-textWidth("press return to restart")/2, (height/3)*2);
-  text("(restart not implemented yet)",width/2-textWidth("(restart not implemented yet)")/2, (height/3)*2+30);
-}
-//__________________________________________________________
-
-function hider(){
-
-  if (frameCount-hide_time > max_hide_time)
-  {
-    state = "hidden";
-    socket.emit('hide',hiding_place);
-  }
-
-  // imageMode(CENTER);
-  background("#7a8786"); 
-  imageMode(CENTER);
-
+function draw_room(){
 //   draw the furniture
-  // room 1
+	// room 1
   plant_obj_room1.draw();
   side_tableObj_1_room1.draw();
   side_tableObj_2_room1.draw();
@@ -355,6 +296,71 @@ for (let i=0; i<width; i+= wall_1.width)
   rect((width/3)-1,550, 12,100);
   rect((width/3)*2-1,550, 12,100);
   rect(width-300,height/2-1, 100,12);
+}
+//__________________________________________________________
+
+// ############################################ prepare sprite
+function prep_sprite(){
+	spritesheet_1.resize(spritesheet_1.width *2.5, spritesheet_1.height *2.5);
+	w = int(spritesheet_1.width /24);
+	h = int(spritesheet_1.height);
+
+	for (let y = 0; y <1 ; y++) {
+	sprites_1[y] = [];
+	for (let x = 0; x < 24; x++) {
+		sprites_1[y][x] = spritesheet_1.get(x * w, y * h, w, h);
+	} // iterate over rows
+	} // iterate over columns
+
+	spritesheet_2.resize(spritesheet_2.width *2.5, spritesheet_2.height *2.5);
+	w = int(spritesheet_2.width /24);
+	h = int(spritesheet_2.height);
+
+	for (let y = 0; y <1 ; y++) {
+	sprites_2[y] = [];
+	for (let x = 0; x < 24; x++) {
+		sprites_2[y][x] = spritesheet_2.get(x * w, y * h, w, h);
+	} // iterate over rows
+	} // iterate over columns
+
+	// // // // // 
+	P_2 = new Player(sprites_2);
+	P_1 = new Player(sprites_1);
+	sides = wall_4.width+7;
+}
+//__________________________________________________________
+
+function hidden(){
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,width,height)
+
+  textFont("VT323"); 
+  textSize(20);
+  fill("white");
+  let Text = "hiding place: " + hiding_place;
+  text(Text,width/2-textWidth(Text)/2, height/2);
+
+  textSize(15);
+  text("press return to restart",width/2-textWidth("press return to restart")/2, (height/3)*2);
+  text("(restart not implemented yet)",width/2-textWidth("(restart not implemented yet)")/2, (height/3)*2+30);
+}
+//__________________________________________________________
+
+function hider(){
+
+  if (frameCount-hide_time > max_hide_time)
+  {
+    state = "hidden";
+    socket.emit('hide',hiding_place);
+  }
+
+  // imageMode(CENTER);
+  background("#7a8786"); 
+  imageMode(CENTER);
+
+//   draw the room
+	draw_room();
 
   if (role == "hider")
   {
