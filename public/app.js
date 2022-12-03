@@ -272,7 +272,6 @@ function setup() {
 }//end of setup
 
 function draw() {
-  print(mouseX,mouseY);
   if(state == "start"){
       start()
     }
@@ -307,6 +306,9 @@ function draw() {
     //print("end");  
     end();
   }
+  else if (state == "more_than_2"){
+    more_than_2();
+  }
   // else if (state == "pop_up_seeker")
   // {
   //   center_pg_popup("no one is hiding here","show");
@@ -321,22 +323,29 @@ function draw() {
 function mouseClicked() {
   if(start_btn.InRange() && state =="start"){
     state = "waiting";
-      socket = io();
-      socket.on('connect', () => {
-          console.log("connection established to server");
-          role = socket.role;
-          console.log(role);
+    room=window.prompt('Enter the room name: ')
+    console.log(room);
+    socket = io();
+    socket.room=room;
+    socket.emit('room',room);
+
+    socket.on('set_role',(data)=>{
+      socket.role=data;
+    })
+
+
+    socket.on('connect', () => {
+        console.log("connection established to server");
       })
 
-      socket.on('not_implemented',(data)=>{
-        window.alert('2 players are already playing, please wait and refresh!');
-        socket.disconnect();
+      socket.on('more_than_2',(data)=>{
+        console.log('hi');
+        state="more_than_2";
       })
 
       socket.on('start',(data)=>{
         player_num=2;
-        console.log(data);
-        role = data;
+        role = socket.role;
         if (role=='hider'){
           socket.on('move_seeker',(data)=>{
             spectator_left=data.left;
@@ -500,28 +509,23 @@ function waiting_page(){
     stroke("white");
     if (k> (width/2+textWidth("WAITING")/2) +30)
     {
-      print("this");
       point(k-30, height/2-5);
     }
     if (k > (width/2+textWidth("WAITING")/2) +60)
     {
-      print("that");
       point(k-60, height/2-5);
     }
     if (k > (width/2+textWidth("WAITING")/2) +90)
     {
-      print("that");
       point(k-90, height/2-5);
     }
     if (k > (width/2+textWidth("WAITING")/2) +120)
     {
-      print("that");
       point(k-120, height/2-5);
     }
 
     if (k >860)
     {
-      print("these");
       k = width/2+textWidth("WAITING")/2;
     }
     k+=2;
@@ -615,6 +619,23 @@ async function display_role(){
     state = "start_game"
     hide_time = frameCount;
   }
+}
+
+function more_than_2(){
+  noLoop();
+  rectMode(CORNER);
+  fill("black");
+  rect(0,0,width,height);
+
+  textFont("VT323"); 
+  textSize(75);
+  fill("white");
+  let Text = "2 Players are already playing in this room";
+  text(Text,width/2-textWidth(Text)/2, height/2);
+  textSize(50);
+  Text=`Refresh the window`
+  text(Text,width/2-textWidth(Text)/2, height/2+70);
+  socket.disconnect();
 }
 
 function hider_hidden(){
