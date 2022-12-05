@@ -420,3 +420,19 @@ async function center_pg_popup(Text)
   await delay(500);
   loop()
 }
+function more_than_2() {
+  noLoop();
+  rectMode(CORNER);
+  fill("black");
+  rect(0, 0, width, height);
+
+  textFont("VT323");
+  textSize(75);
+  fill("white");
+  let Text = "2 Players are already playing in this room";
+  text(Text, width / 2 - textWidth(Text) / 2, height / 2);
+  textSize(50);
+  Text = `Refresh the window`
+  text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 70);
+  socket.disconnect();
+}
