@@ -23,7 +23,7 @@ function setup() {
 
   textFont("VT323");
   textSize(15);
-  instructions_btn = new BUTTON("start game", width / 2 + (textWidth("instructions") / 2) - 35, height - 100);
+  instructions_btn = new BUTTON("start game", width / 2 + (textWidth("instructions") / 2) - 35, height - 50);
 
   // create dark rooms
   DarkRoom1 = new darkRoom((width / 3) / 2, height / 4);

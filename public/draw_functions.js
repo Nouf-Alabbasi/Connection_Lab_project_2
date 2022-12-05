@@ -138,6 +138,11 @@ function instructions(){
   fill("white");
   text(line_5,930, 280);
 
+  text("hint system: ",90, 585);
+  text("WARM/CLOSE: ",460-150, 585);
+  image(red_hint,490,550,150,50);
+  text("COLD/FAR: ",860-150, 585);
+  image(blue_hint,860,550,150,50);
   instructions_btn.draw_button();
   
 }
@@ -348,39 +353,6 @@ function hidden(){
   text("press return to restart",width/2-textWidth("press return to restart")/2, (height/3)*2);
   text("(restart not implemented yet)",width/2-textWidth("(restart not implemented yet)")/2, (height/3)*2+30);
 }
-//__________________________________________________________
-
-function hider(){
-
-  if (frameCount-hide_time > max_hide_time)
-  {
-    state = "hidden";
-    socket.emit('hide',hiding_place);
-  }
-
-  // imageMode(CENTER);
-  background("#7a8786"); 
-  imageMode(CENTER);
-
-//   draw the room
-	draw_room();
-
-  if (role == "hider")
-  {
-    P_1.draw();
-    textFont("VT323"); 
-    textSize(20);
-    fill("white");
-    let timer = "time: " + int((frameCount-hide_time)/60)+"/"+int(max_hide_time/60);
-    text(timer, wall_4.width,20);
-  }
-  else{
-    P_2.draw();
-  }
-  print("one: ", hiding_place_Y);
-
-}
-//__________________________________________________________
 
 // ############################################ draw the popups
 function popup(Text)

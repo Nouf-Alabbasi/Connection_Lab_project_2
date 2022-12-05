@@ -95,6 +95,8 @@ let winSound;
 let missHitSound;
 let lossSound;
 
+let red_hint;
+let blue_hint;
 
 function preload() {
 //   sprites by @ScissorMarks 
@@ -117,6 +119,8 @@ function preload() {
   dining_table_chair_2= loadImage("imgs/2objects_house_0014_Layer-15.png");
   dining_table_chair_3= loadImage("imgs/3objects_house_0014_Layer-15.png");
 
+  red_hint = loadImage("imgs/red_hint.png");
+  blue_hint = loadImage("imgs/blue_hint.png");
 
   wall_1 = loadImage("imgs/walls/walls_0043_Layer-44.png");
   wall_2 = loadImage("imgs/walls/walls_0044_Layer-45.png");
