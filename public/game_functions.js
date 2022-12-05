@@ -48,17 +48,25 @@ function seeker(){
   //   draw the furniture
   draw_room();
 
-  P_2.draw();
-  
   //hint system
   let d = dist(hiding_place_X, hiding_place_Y, P_2.get_x(), P_2.get_y());
   d = map(d, 0, width, 0, 255);
   noStroke();
-  strokeWeight(3)
-  stroke("black")
+  strokeWeight(3);
+  stroke("#394747");
+  fill("#394747");
+  rect(wall_4.width,height-25,170,20);
+
+  fill("white");
+  textSize(20);
+  text("distance from hider",wall_4.width+5,height-10);
+
   fill(255-d*1.5, 50, d);
-  rect(70,height-30,70,20);
+  rect(190,height-25,70,20);
+
   //hint system
+
+  P_2.draw();
 
   textFont("VT323"); 
   textSize(20);

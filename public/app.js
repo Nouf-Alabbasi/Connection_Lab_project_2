@@ -36,7 +36,7 @@ function setup() {
 function draw() {
   print(mouseX, mouseY);
   if (state == "start") {
-    start()
+    start();
   }
   else if (state == "waiting") {
     waiting_page();
