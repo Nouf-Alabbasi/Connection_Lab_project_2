@@ -50,7 +50,16 @@ function seeker(){
 
   P_2.draw();
   
-
+  //hint system
+  let d = dist(hiding_place_X, hiding_place_Y, P_2.get_x(), P_2.get_y());
+  d = map(d, 0, width, 0, 255);
+  noStroke();
+  strokeWeight(3)
+  stroke("black")
+  fill(255-d*1.5, 50, d);
+  rect(70,height-30,70,20);
+  //hint system
+  
   textFont("VT323"); 
   textSize(20);
   fill("white");

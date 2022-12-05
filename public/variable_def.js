@@ -83,6 +83,9 @@ let pop_up_end = 500;
 
 let state = "start";
 let hiding_place = "bed";
+hiding_place_X;
+hiding_place_Y;
+
 let search_place;
 let num_searched_places = 0;
 let max_num_searches = 3;
