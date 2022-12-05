@@ -82,9 +82,9 @@ let pop_up_start = 0;
 let pop_up_end = 500;
 
 let state = "start";
-let hiding_place = "bed";
-hiding_place_X;
-hiding_place_Y;
+let hiding_place = "bed in bedroom";
+hiding_place_X = 230;
+hiding_place_Y = 125;
 
 let search_place;
 let num_searched_places = 0;
@@ -95,11 +95,6 @@ let winSound;
 let missHitSound;
 let lossSound;
 
-
-let k = 700;
-let waiting_text = "WAITING";
-let Second_line = "";
-let stop_time = 1000000;
 
 function preload() {
 //   sprites by @ScissorMarks 

@@ -33,7 +33,10 @@ function end(){
   noLoop();
 }
 //__________________________________________________________
-
+let k = 700;
+let waiting_text = "WAITING";
+let Second_line = "";
+let stop_time = 1000000;
 function waiting_page(){
   cursor("default");
   rectMode(CORNER);
@@ -374,6 +377,7 @@ function hider(){
   else{
     P_2.draw();
   }
+  print("one: ", hiding_place_Y);
 
 }
 //__________________________________________________________

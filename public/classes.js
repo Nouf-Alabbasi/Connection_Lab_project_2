@@ -332,11 +332,12 @@ class furniture{
     this.img = img;
     this.h = this.img.height/6;
     this.w = this.img.width/6;
+    // this.X_center_pos = 
     this.x=x;
     this.y=y;
     this.color = "#7a8786";
   }
-  
+
   draw(){
     imageMode(CENTER);
     rectMode(CENTER);
@@ -368,6 +369,8 @@ class furniture{
         {
           popup("click space to hide");
           hiding_place = this.place;
+          hiding_place_X = this.x;
+          hiding_place_Y = this.y;
           this.color = "red";
         }
         else if (role =="seeker")
