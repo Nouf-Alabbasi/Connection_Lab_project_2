@@ -34,7 +34,7 @@ function setup() {
 }//end of setup
 
 function draw() {
-  print(mouseX, mouseY);
+  // print(mouseX, mouseY);
   if (state == "start") {
     start();
   }
@@ -49,7 +49,7 @@ function draw() {
   }
   else if (state == "start_game") {
     hid = false;
-    print(hide_time);
+    // print(hide_time);
     if (role == "hider") {
       hider()
     }
@@ -111,7 +111,9 @@ function mouseClicked() {
     })
 
     socket.on('set_hiding_place', (data) => {
-      hiding_place = data;
+      hiding_place = data.place;
+      hiding_place_X=data.X_pos;
+      hiding_place_Y=data.Y_pos;
       hid = true;
     })
 
@@ -143,7 +145,15 @@ function keyPressed() {
     if (key == ' ') {
       if (role == "hider" && P_1.check_in_Bound()) {
         state = "hidden";
-        socket.emit('hide', hiding_place);
+        //some hint system code
+        state = "hidden";
+            let hiding_place_OBJ = {
+              place: hiding_place, 
+              X_pos: hiding_place_X, 
+              Y_pos: hiding_place_Y
+            }
+        socket.emit('hide',hiding_place_OBJ);
+        //some hint system code
       }
 
       else if (role == "seeker" && P_2.check_in_Bound()) {
@@ -155,7 +165,7 @@ function keyPressed() {
         if (num_searched_places >= max_num_searches) {
           socket.emit('end', "hider");
         }
-        print("num: ", num_searched_places);
+        // print("num: ", num_searched_places);
 
 
         // pop_up_start = frameCount;

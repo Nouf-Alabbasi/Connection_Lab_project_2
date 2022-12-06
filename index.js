@@ -37,7 +37,7 @@ io.on('connect', (socket) => {
         }
         else if (rooms[data] == 1) {
             socket.room = data;
-            socket.emit('set_role', 'seeker');
+            socket.emit('set_role', 'hider');
             rooms[data]++;
             socket.join(data);
             io.in(data).emit('start', socket.role);
@@ -55,6 +55,8 @@ io.on('connect', (socket) => {
 
     socket.on('hide', (data) => {
         io.emit('set_hiding_place', data);
+        // io.emit('set_hiding_place_X', data);
+        // io.emit('set_hiding_place_Y', data);
     })
     socket.on('move', (data) => {
         io.emit('move_seeker', data);

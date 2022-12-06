@@ -34,6 +34,8 @@ function hider_hidden(){
 //__________________________________________________________
 
 function seeker(){
+  print(hiding_place_X);
+  print(hiding_place_Y);
   imageMode(CENTER);
   background("#7a8786"); 
   imageMode(CENTER);
@@ -63,7 +65,6 @@ function seeker(){
 
   fill(255-d*1.5, 50, d);
   rect(190,height-25,70,20);
-
   //hint system
 
   P_2.draw();

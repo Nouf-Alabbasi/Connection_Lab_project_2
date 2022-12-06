@@ -369,8 +369,12 @@ class furniture{
         {
           popup("click space to hide");
           hiding_place = this.place;
+
+          //hint system
           hiding_place_X = this.x;
           hiding_place_Y = this.y;
+          //hint system
+
           this.color = "red";
         }
         else if (role =="seeker")
