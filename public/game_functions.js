@@ -79,8 +79,11 @@ function seeker(){
 //__________________________________________________________
 
 function hider(){
-
-  if (frameCount-hide_time > max_hide_time)
+  // if (current_hiding_time > max_hide_time/60)
+  // print(current_hiding_time);
+  print((current_hiding_time - frameCount)/60);
+  // print(current_hiding_time-((frameCount-hide_time))/60);
+  if (current_hiding_time <=0)
   {
     state = "hidden";
     socket.emit('hide',hiding_place);
@@ -99,7 +102,8 @@ function hider(){
     textFont("VT323"); 
     textSize(20);
     fill("white");
-    let timer = "time: " + int((frameCount-hide_time)/60)+"/"+int(max_hide_time/60);
+    current_hiding_time = int(current_hiding_time-((frameCount-hide_time))/60);
+    let timer = "time: " + int(current_hiding_time/60) +"/"+int(max_hide_time/60);
     text(timer, wall_4.width,20);
   }
   else{
