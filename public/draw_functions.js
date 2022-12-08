@@ -19,6 +19,7 @@ function end(){
   rectMode(CORNER);
   fill("black");
   rect(0,0,width,height);
+  refresh_btn.draw_button();
 
   textFont("VT323"); 
   textSize(100);
@@ -29,8 +30,7 @@ function end(){
   let word = won?'won':'lost';
   Text=`You have ${word} the game!`
   text(Text,width/2-textWidth(Text)/2, height/2+70);
-  socket.disconnect();
-  noLoop();
+  // noLoop();
 }
 //__________________________________________________________
 let k = 700;
@@ -145,7 +145,7 @@ function instructions(){
   text("COLD/FAR: ",860-150, 585);
   image(blue_hint,860,550,150,50);
   //hint system
-  
+
   instructions_btn.draw_button();
   
 }

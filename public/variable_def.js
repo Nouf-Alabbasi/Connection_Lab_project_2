@@ -73,6 +73,7 @@ let DarkRoom3;
 let DarkRoom4;
 
 let start_btn;
+let refresh_btn;
 let instructions_btn;
 let player_num = 0;
 let role = "seeker";
