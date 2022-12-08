@@ -46,20 +46,19 @@ io.on('connect', (socket) => {
             socket.emit('more_than_2', socket.id);
         }
     })
-
-
-
+    socket.on('didnt_hide', () => {
+        io.in(socket.room).emit('end_screen', 'didnt_hide');
+    })
     socket.on('end', (data) => {
-        io.emit('end_screen', data);
+        io.in(socket.room).emit('end_screen', data);
     })
 
     socket.on('hide', (data) => {
-        io.emit('set_hiding_place', data);
-        // io.emit('set_hiding_place_X', data);
-        // io.emit('set_hiding_place_Y', data);
+        console.log(data);
+        io.in(socket.room).emit('set_hiding_place', data);
     })
     socket.on('move', (data) => {
-        io.emit('move_seeker', data);
+        io.in(socket.room).emit('move_seeker', data);
     })
     socket.on('disconnect', () => {
         console.log('Disconnected');
