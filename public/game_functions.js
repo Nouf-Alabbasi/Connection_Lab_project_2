@@ -78,9 +78,11 @@ function seeker() {
 
 //__________________________________________________________
 
-function hider() {
 
-  if (frameCount - hide_time > max_hide_time) {
+
+function hider(){
+  if (time_spent>max_hide_time)
+  {
     state = "hidden";
     socket.emit('didnt_hide', hiding_place);
   }
@@ -97,8 +99,10 @@ function hider() {
     textFont("VT323");
     textSize(20);
     fill("white");
-    let timer = "time: " + int((frameCount - hide_time) / 60) + "/" + int(max_hide_time / 60);
-    text(timer, wall_4.width, 20);
+
+    let timer = "time: " + int((max_hide_time-time_spent)/60) +"/"+int(max_hide_time/60);
+    text(timer, wall_4.width,20);
+    time_spent +=1;
   }
   else {
     P_2.draw();
