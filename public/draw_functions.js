@@ -138,11 +138,14 @@ function instructions(){
   fill("white");
   text(line_5,930, 280);
 
+  //hint system
   text("hint system: ",90, 585);
   text("WARM/CLOSE: ",460-150, 585);
   image(red_hint,490,550,150,50);
   text("COLD/FAR: ",860-150, 585);
   image(blue_hint,860,550,150,50);
+  //hint system
+  
   instructions_btn.draw_button();
   
 }
@@ -168,7 +171,7 @@ async function display_role(){
   if ((frameCount-stop_time>100 && role=='hider') || (role=='seeker' && hid))
   {
     state = "start_game"
-    hide_time = frameCount;
+    // hide_time = frameCount;
   }
 }
 //__________________________________________________________
