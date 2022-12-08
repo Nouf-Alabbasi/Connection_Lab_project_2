@@ -29,9 +29,9 @@ function end() {
   text(Text, width / 2 - textWidth(Text) / 2, height / 2);
   textSize(50);
 
-  let word = won?'won':'lost';
-  Text=`You have ${word} the game!`
-  text(Text,width/2-textWidth(Text)/2, height/2+70);
+  // let word = won?'won':'lost';
+  // Text=`You have ${word} the game!`
+  // text(Text,width/2-textWidth(Text)/2, height/2+70);
   // noLoop();
 
   if (didnt_hide == false) {
