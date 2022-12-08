@@ -171,7 +171,7 @@ async function display_role(){
   if ((frameCount-stop_time>100 && role=='hider') || (role=='seeker' && hid))
   {
     state = "start_game"
-    hide_time = frameCount;
+    // hide_time = frameCount;
   }
 }
 //__________________________________________________________
