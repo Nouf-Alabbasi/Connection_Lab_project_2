@@ -112,12 +112,17 @@ function mouseClicked() {
 
     socket.on('set_hiding_place', (data) => {
       hiding_place = data.place;
-      hiding_place_X=data.X_pos;
-      hiding_place_Y=data.Y_pos;
+      hiding_place_X = data.X_pos;
+      hiding_place_Y = data.Y_pos;
       hid = true;
     })
 
     socket.on('end_screen', (data) => {
+      if (data == 'didnt_hide') {
+        didnt_hide = true;
+        state = 'end';
+      }
+
       if (data == role) {
         console.log('win!!!')
         won = true;
@@ -147,12 +152,12 @@ function keyPressed() {
         state = "hidden";
         //some hint system code
         state = "hidden";
-            let hiding_place_OBJ = {
-              place: hiding_place, 
-              X_pos: hiding_place_X, 
-              Y_pos: hiding_place_Y
-            }
-        socket.emit('hide',hiding_place_OBJ);
+        let hiding_place_OBJ = {
+          place: hiding_place,
+          X_pos: hiding_place_X,
+          Y_pos: hiding_place_Y
+        }
+        socket.emit('hide', hiding_place_OBJ);
         //some hint system code
       }
 

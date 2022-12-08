@@ -1,15 +1,15 @@
 // this file holds the variabels and pregame prep functions (such as preload)
 let socket;
-let stop=false;
+let stop = false;
 
 let P_1;
 let won;
 let moveData;
 let P_2;
 
-let hid=false;
-let sprites_1 =[];
-let sprites_2 =[];
+let hid = false;
+let sprites_1 = [];
+let sprites_2 = [];
 let spritesheet_1;
 let spritesheet_2;
 let w;
@@ -50,7 +50,7 @@ let dining_table_obj_room4;
 let chair_obj_1;
 let chair_obj_2;
 let chair_obj_3;
-
+let didnt_hide = false;
 let check;
 let sides;
 let wall_1;
@@ -100,10 +100,10 @@ let red_hint;
 let blue_hint;
 
 function preload() {
-//   sprites by @ScissorMarks 
+  //   sprites by @ScissorMarks 
   spritesheet_1 = loadImage("imgs/DinoSprites-doux.png");
   spritesheet_2 = loadImage("imgs/DinoSprites-mort.png");
-  
+
   plant = loadImage("imgs/objects_house_0055_Layer-56.png");
   side_table = loadImage("imgs/objects_house_0049_Layer-50.png");
   table = loadImage("imgs/objects_house_0039_Layer-40.png");
@@ -116,9 +116,9 @@ function preload() {
   sofa_side = loadImage("imgs/objects_house_0003_Layer-4.png")
   rug = loadImage("imgs/rug.png")
   dining_table = loadImage("imgs/objects_house_0044_Layer-45.png");
-  dining_table_chair_1= loadImage("imgs/objects_house_0014_Layer-15.png");
-  dining_table_chair_2= loadImage("imgs/2objects_house_0014_Layer-15.png");
-  dining_table_chair_3= loadImage("imgs/3objects_house_0014_Layer-15.png");
+  dining_table_chair_1 = loadImage("imgs/objects_house_0014_Layer-15.png");
+  dining_table_chair_2 = loadImage("imgs/2objects_house_0014_Layer-15.png");
+  dining_table_chair_3 = loadImage("imgs/3objects_house_0014_Layer-15.png");
 
   red_hint = loadImage("imgs/red_hint.png");
   blue_hint = loadImage("imgs/blue_hint.png");
