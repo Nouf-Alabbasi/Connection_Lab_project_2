@@ -45,7 +45,7 @@ let bed_obj_2_room3;
 let bed_obj_room3;
 let tv_room3;
 let sofa_room3;
-
+let time_at_hide;
 let dining_table_obj_room4;
 let chair_obj_1;
 let chair_obj_2;
@@ -92,7 +92,7 @@ let num_searched_places = 0;
 let max_num_searches = 3;
 // let hide_time = 0;
 let max_hide_time = 900;
-let time_spent=-60;
+let time_spent = -60;
 let winSound;
 let missHitSound;
 let lossSound;

@@ -1,5 +1,6 @@
 // this file holds the functions that are responsible for displaying the different things on the screen
 
+
 // ############################################ draw the state screens
 function start() {
   rectMode(CORNER);
@@ -19,7 +20,7 @@ function end() {
   rectMode(CORNER);
   fill("black");
 
-  rect(0,0,width,height);
+  rect(0, 0, width, height);
   refresh_btn.draw_button();
 
   textFont("VT323");
@@ -154,11 +155,11 @@ function instructions() {
 
 
   //hint system
-  text("hint system: ",90, 585);
-  text("WARM/CLOSE: ",460-150, 585);
-  image(red_hint,490,550,150,50);
-  text("COLD/FAR: ",860-150, 585);
-  image(blue_hint,860,550,150,50);
+  text("hint system: ", 90, 585);
+  text("WARM/CLOSE: ", 460 - 150, 585);
+  image(red_hint, 490, 550, 150, 50);
+  text("COLD/FAR: ", 860 - 150, 585);
+  image(blue_hint, 860, 550, 150, 50);
   //hint system
 
   instructions_btn.draw_button();
@@ -183,9 +184,11 @@ async function display_role() {
     text(wait_text, width / 2 - textWidth(wait_text) / 2, 370);
   }
   await delay(700);
-  if ((frameCount - stop_time > 100 && role == 'hider') || (role == 'seeker' && hid)) {
-    state = "start_game"
-    // hide_time = frameCount;
+  if (frameCount - stop_time > 100 && role == 'hider') {
+    state = 'start_game';
+  } else if (role == 'seeker' && hid) {
+    time_at_hide = frameCount;
+    state = 'intermediate';
   }
 }
 //__________________________________________________________
@@ -408,7 +411,6 @@ async function center_pg_popup(Text) {
   loop()
 }
 function more_than_2() {
-  noLoop();
   rectMode(CORNER);
   fill("black");
   rect(0, 0, width, height);
@@ -419,7 +421,55 @@ function more_than_2() {
   let Text = "2 Players are already playing in this room";
   text(Text, width / 2 - textWidth(Text) / 2, height / 2);
   textSize(50);
-  Text = `Refresh the window`
-  text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 70);
+  restart_btn.draw_button();
+}
+
+function disconnected() {
+  rectMode(CORNER);
+  fill("black");
+  rect(0, 0, width, height);
+
+  textFont("VT323");
+  textSize(100);
+  fill("white");
+  let Text = "Your opponent disconnected!";
+  text(Text, width / 2 - textWidth(Text) / 2, height / 2);
+  restart_btn.draw_button();
   socket.disconnect();
+}
+
+function intermediate_screen() {
+  rectMode(CORNER);
+  fill("black");
+  rect(0, 0, width, height);
+
+  textFont("VT323");
+  textSize(100);
+  fill("white");
+  if (role == 'hider') {
+    let Text = "You have hidden!";
+    text(Text, width / 2 - textWidth(Text) / 2, height / 2);
+    textSize(75);
+    fill("white");
+    Text = "Time for the seeker to seek";
+    text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 70);
+    Text = 3 - (floor((frameCount - time_at_hide) / 60));
+    text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 140);
+    if (frameCount - time_at_hide > 180) {
+      state = 'hidden';
+    }
+  } else {
+    let Text = "Hider has hidden!";
+    text(Text, width / 2 - textWidth(Text) / 2, height / 2);
+    textSize(75);
+    fill("white");
+    Text = "Time for you to seek";
+    text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 70);
+    Text = 3 - (floor((frameCount - time_at_hide) / 60));
+    text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 140);
+    if (frameCount - time_at_hide > 180) {
+      state = 'start_game';
+    }
+  }
+
 }
