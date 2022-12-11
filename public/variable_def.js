@@ -123,6 +123,9 @@ function preload() {
 
   red_hint = loadImage("imgs/red_hint.png");
   blue_hint = loadImage("imgs/blue_hint.png");
+  hint_seeker = loadImage("imgs/hints_seeker.png");
+  searches_seeker = loadImage("imgs/search_limit_seeker.png");
+  timer_hider = loadImage("imgs/timer_hider.png");
 
   wall_1 = loadImage("imgs/walls/walls_0043_Layer-44.png");
   wall_2 = loadImage("imgs/walls/walls_0044_Layer-45.png");

@@ -128,39 +128,54 @@ function instructions() {
   textFont("monospace");
   textSize(25);
   let line_1 = "This is an online hide and seek game. You play online with another player.";
-  let line_2 = "One player will be the seeker, and the other would be the hider";
-  let line_3 = "To move The players would use the";
-  let line_4 = " up  down  left  right";
-  let line_5 = " arrows";
-  let line_6 = " The seeker should press the space bar to search a hiding spot";
-  let line_7 = " The hider should press the space bar to hide in a hiding spot";
-  let line_8 = "SPACE";
-  fill("white");
-  rect(585 + 14, 250, 58, 50);
-  rect(656 + 15, 250, 70, 50);
-  rect(745 + 15, 250, 70, 50);
-  rect(850, 250, 80, 50);
-  rect(width / 2 - 400 / 2, 460, 400, 60);
-  text(line_1, width / 2 - textWidth(line_1) / 2, 170);
-  text(line_2, 85, 220);
-  text(line_3, 85, 280);
-  text(line_6, 70, 360);
-  text(line_7, 70, 410);
+
+  let displace_x = 300;
+  let displace_y = -130;
+  // arrows
+  fill("#f8f9fa");
+  stroke("#dee2e6");
+  strokeWeight(1);
+  rect(600+displace_x, 250-displace_y, 70, 75,5);
+  rect(675+displace_x, 330-displace_y, 75,70,5);
+  rect(520+displace_x, 330-displace_y, 75,70,5);
+  rect(600+displace_x, 330-displace_y, 70,70,5);
+  rect(480+displace_x, 410-displace_y, 310,60,5);
+
+  // arrow text
+  textSize(20);
+  fill("#e5383b");
+  noStroke();
+  text("up", 635-textWidth("up")/2+displace_x, 310-displace_y);
+  text("right", 713-textWidth("right")/2+displace_x, 385-displace_y);
+  text("left", 555-textWidth("left")/2+displace_x, 385-displace_y);
+  text("down", 635-textWidth("down")/2+displace_x, 385-displace_y);
   fill("black");
-  text(line_4, 600, 280);
-  text(line_8, width / 2 - (textWidth(line_8) / 2), 500);
+  text("space bar", 580+displace_x, 465-displace_y);
+  fill("#e5383b");
+  text("HIDE IN/SEARCH FURNITURE", 490+displace_x, 445-displace_y);
 
-  fill("white");
-  text(line_5, 930, 280);
+  fill("#f8f9fa");
+  text(line_1, width / 2 - textWidth(line_1) / 2, 170);
+  
 
+  // hints and timer
+  fill("#e5383b");
+  image(timer_hider,780,200,350,120);
+  text("15 sec time limit to hide", 780, 350);
 
-  //hint system
-  text("hint system: ", 90, 585);
-  text("WARM/CLOSE: ", 460 - 150, 585);
-  image(red_hint, 490, 550, 150, 50);
-  text("COLD/FAR: ", 860 - 150, 585);
-  image(blue_hint, 860, 550, 150, 50);
-  //hint system
+  image(searches_seeker,100,200,550,120);
+  text("seeker can search under a max of 3 furniture", 100, 350);
+
+  image(hint_seeker,100,455,550,120);
+  text("hints for the seeker - red -> close, blue -> far", 100, 600);
+
+  // //hint system
+  // text("hint system: ", 90, 585);
+  // text("WARM/CLOSE: ", 460 - 150, 585);
+  // image(red_hint, 490, 550, 150, 50);
+  // text("COLD/FAR: ", 860 - 150, 585);
+  // image(blue_hint, 860, 550, 150, 50);
+  // //hint system
 
   instructions_btn.draw_button();
 
@@ -182,7 +197,13 @@ async function display_role() {
     wait_text = "waiting for the hider to hide"
     textSize(40);
     text(wait_text, width / 2 - textWidth(wait_text) / 2, 370);
+    text("you have a maximum of 3 furniture to search under", width / 2 - textWidth("you have a maximum of 3 furniture to search under") / 2, 400);
   }
+  else if (role == 'hider'){
+    textSize(40);
+    text("you have 15 sec to hide", width / 2 - textWidth("you have 15 sec to hide") / 2, 370);
+  }
+
   await delay(700);
   if (frameCount - stop_time > 100 && role == 'hider') {
     state = 'start_game';
