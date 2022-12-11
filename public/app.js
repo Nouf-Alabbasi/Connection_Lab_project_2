@@ -73,12 +73,15 @@ function draw() {
   else if (state == "disconnected") {
     disconnected();
   }
+  else if (state == 'intermediate') {
+    intermediate_screen();
+  }
 
 
 }//end of draw function
 
 function mouseClicked() {
-  if (restart_btn.InRange() && state == 'disconnected') {
+  if (restart_btn.InRange() && (state == 'disconnected' || state == 'more_than_2')) {
     location.reload();
   }
   if (start_btn.InRange() && state == "start") {
@@ -109,14 +112,22 @@ function mouseClicked() {
       // console.log(data);
       // role = data;
       role = socket.role;
-      if (role == 'hider') {
-        socket.on('move_seeker', (data) => {
-          spectator_left = data.left;
-          spectator_right = data.right;
-          spectator_up = data.up;
-          spectator_down = data.down;
-        })
-      }
+      // if (role == 'hider') {
+      //   socket.on('move_seeker', (data) => {
+      //     console.log('hi');
+      //     spectator_left = data.left;
+      //     spectator_right = data.right;
+      //     spectator_up = data.up;
+      //     spectator_down = data.down;
+      //   })
+      // }
+    })
+
+    socket.on('move_seeker', (data) => {
+      spectator_left = data.left;
+      spectator_right = data.right;
+      spectator_up = data.up;
+      spectator_down = data.down;
     })
 
     socket.on('set_hiding_place', (data) => {
@@ -164,9 +175,11 @@ function keyPressed() {
   if (state == "start_game") {
     if (key == ' ') {
       if (role == "hider" && P_1.check_in_Bound()) {
-        state = "hidden";
+        // state = "hidden";
         //some hint system code
-        state = "hidden";
+        // state = "hidden";
+        state = 'intermediate';
+        time_at_hide = frameCount;
         let hiding_place_OBJ = {
           place: hiding_place,
           X_pos: hiding_place_X,

@@ -43,6 +43,7 @@ io.on('connect', (socket) => {
             io.in(data).emit('start', socket.role);
         }
         else {
+            rooms[data]++;
             socket.emit('more_than_2', socket.id);
         }
     })
