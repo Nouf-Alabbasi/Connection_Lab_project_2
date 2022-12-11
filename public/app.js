@@ -20,12 +20,13 @@ function setup() {
 
   //creating button obj
   start_btn = new BUTTON("start", width / 2, height / 2 + 60);
+  restart_btn = new BUTTON("restart", width / 2, height / 2 + 60);
 
   textFont("VT323");
   textSize(15);
   instructions_btn = new BUTTON("start game", width / 2 + (textWidth("instructions") / 2) - 35, height - 50);
 
-  refresh_btn = new BUTTON("restart", width / 2 + (textWidth("restart") / 2)-65, height - 50);
+  refresh_btn = new BUTTON("restart", width / 2 + (textWidth("restart") / 2) - 65, height - 50);
   // create dark rooms
   DarkRoom1 = new darkRoom((width / 3) / 2, height / 4);
   DarkRoom2 = new darkRoom((width / 3) * 1.5, height / 4);
@@ -69,11 +70,17 @@ function draw() {
   else if (state == "more_than_2") {
     more_than_2();
   }
+  else if (state == "disconnected") {
+    disconnected();
+  }
 
 
 }//end of draw function
 
 function mouseClicked() {
+  if (restart_btn.InRange() && state == 'disconnected') {
+    location.reload();
+  }
   if (start_btn.InRange() && state == "start") {
     state = "waiting";
     room = window.prompt('Enter the room name: ')
@@ -85,8 +92,9 @@ function mouseClicked() {
     socket.on('set_role', (data) => {
       socket.role = data;
     })
-
-
+    socket.on('disconnected', (data) => {
+      state = 'disconnected';
+    })
     socket.on('connect', () => {
       console.log("connection established to server");
     })
@@ -144,8 +152,7 @@ function mouseClicked() {
     state = "display role";
   }
 
-  if (refresh_btn.InRange() && state == "end")
-  {
+  if (refresh_btn.InRange() && state == "end") {
     window.location.reload();
     socket.disconnect();
     noLoop();

@@ -19,7 +19,7 @@ function end() {
   rectMode(CORNER);
   fill("black");
 
-  rect(0,0,width,height);
+  rect(0, 0, width, height);
   refresh_btn.draw_button();
 
   textFont("VT323");
@@ -154,11 +154,11 @@ function instructions() {
 
 
   //hint system
-  text("hint system: ",90, 585);
-  text("WARM/CLOSE: ",460-150, 585);
-  image(red_hint,490,550,150,50);
-  text("COLD/FAR: ",860-150, 585);
-  image(blue_hint,860,550,150,50);
+  text("hint system: ", 90, 585);
+  text("WARM/CLOSE: ", 460 - 150, 585);
+  image(red_hint, 490, 550, 150, 50);
+  text("COLD/FAR: ", 860 - 150, 585);
+  image(blue_hint, 860, 550, 150, 50);
   //hint system
 
   instructions_btn.draw_button();
@@ -421,5 +421,19 @@ function more_than_2() {
   textSize(50);
   Text = `Refresh the window`
   text(Text, width / 2 - textWidth(Text) / 2, height / 2 + 70);
+  socket.disconnect();
+}
+
+function disconnected() {
+  rectMode(CORNER);
+  fill("black");
+  rect(0, 0, width, height);
+
+  textFont("VT323");
+  textSize(100);
+  fill("white");
+  let Text = "Your opponent disconnected!";
+  text(Text, width / 2 - textWidth(Text) / 2, height / 2);
+  restart_btn.draw_button();
   socket.disconnect();
 }

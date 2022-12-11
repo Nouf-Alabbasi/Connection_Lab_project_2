@@ -63,6 +63,7 @@ io.on('connect', (socket) => {
     socket.on('disconnect', () => {
         console.log('Disconnected');
         rooms[socket.room]--;
+        io.in(socket.room).emit('disconnected');
     })
 })
 
