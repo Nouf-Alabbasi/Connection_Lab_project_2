@@ -124,24 +124,43 @@ we decided the ones that we would tackle which included:
 * add screen to tell hider and seeker that the hider has hid
 
 ### here are some of the chnages:
-#### instructions page:
+## instructions page:
 <p align="left">
   <img src="readme_imgs/instructions_old.png" width="350" title="hover text">
 </p>
-changes:
+changes:<br>
+
 * we realized that people are likely to be already familiar with using the keybaord arrows to move around, so we reduced the instructions that explain that to make space for instructions about things the users are less familiar with or are unique to this game
 * we noticed that the hint instructions in the current version don't really indicate where they could be on the screen so we used screenshots of the hint/timer and search limit text on the screen and placed them in a position that could indicate their placement on the game screen
 * We also clarified the hint, timer and limited searches in the instructions page briefly.
 * We made sure that all the instructions are brief and can be understood as best as possible by a user who only scan this page
+
 <p align="left">
   <img src="readme_imgs/instructions_new.png" width="350" title="hover text">
 </p>
-#### role page:
+
+## role page:
 <p align="left">
   <img src="readme_imgs/hider_role_old.png" width="350" title="hover text">
 </p>
 <p align="left">
   <img src="readme_imgs/seeker_role_new.png" width="350" title="hover text">
 </p>
-changes:
+changes:<br>
+
 * we added a short note on the time limit and maximum for users who skip over the insturctions page as those things are essential to the game 
+<p align="left">
+  <img src="readme_imgs/hider_role_new.png" width="350" title="hover text">
+</p>
+<p align="left">
+  <img src="readme_imgs/seeker_role_old.png" width="350" title="hover text">
+</p>
+
+## hider hidden page:
+<p align="left">
+  <img src="readme_imgs/hider_hidden_seeker.png" width="350" title="hover text">
+</p>
+<p align="left">
+  <img src="readme_imgs/hider_hidden_hider.png" width="350" title="hover text">
+</p>
+
