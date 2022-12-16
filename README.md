@@ -39,7 +39,6 @@ Maintaining the seeker's view
 The seekers view to be displayed for the hider after he has hidden was also a challenging part to implement. This was because the view that was originally created also created the player object with the intention of being controlled by the client. This was then solved by creating a spectator attribute
 https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L756
 inside the player class which is set to true if the view is the seekers view from the hider's perspective. If this attribute is true, the player can not be controlled by the client and the moving data is retrieved from the original seeker through sockets.
-
 adding all the things that make the game intuitive to the user
   This is a very arbritrary challenge to overcome. As a developer it is much harder to think about how to develop the game for a user's intuition. Allowing our friends to play test the game is what truly helped in developing a sense of intuition from the users side. The small things that ended up making a big difference in creating good intuition were:
   1. text to show time/places remaning
@@ -49,8 +48,17 @@ adding all the things that make the game intuitive to the user
   3. adding appropriate sound effects
   https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L415
   4. showing intermediate screens between turns
+  This was done by including new states that the "state" variable could be set as. Then the same delay function introduced at
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L147
+  is used to maintain the intermediate screens for a few seconds before moving onto the next screen.
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/main/public/app.js#L76
   5. restart mechanism
+  The restart problem was solved by creating a button similar to the start button at the start of the game and using it to reload the webpage in the browser. The     command is a simple javascript function and the button is the Button class created for the start button.
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/main/public/app.js#L85
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/main/public/app.js#L76
   6. rooms
+  This category majorly includes the inclusion of rooms in our game. This allows multiple people to play this 2-player game by joining different rooms with their friends. The implementation is made really simple throught he use of rooms already present in Socket.io. This category however also includes how smaller problems with connections are dealt with. For example disconnection of a user midgame should just allow the other player to restart the game. These design decisions and implementations is all bundled into the rooms implementation of the game.
+  
   
 ## potential next steps
 some of the potential next steps include:
@@ -64,7 +72,6 @@ some of the potential next steps include:
 * for the sprites and imgs we used a few game sites that provided game assets.
 
 ## individual paragraphs
-<!--- I think we write about our contributions and our experience ??)-->
 #### Hashim's paragraph
 Creating this project was some of the most fun time spent time I have spent developing. The most interesting part for me was to recreate a an activity that is so common in real life in the digital world. This change from reality to the internet meant a lot of decisions to be made. This included how to properly show the information and what can make the game intuitive. Some decisions like showing the seeker view to the hider after he has hidden is something different real life but in my personal view this makes it more interesting. I was mostly supposed to handle the backend of the game. Through this project I could truly understand why sockets can be so efficent for real-time information transfer.
 #### Nouf's pragraph
