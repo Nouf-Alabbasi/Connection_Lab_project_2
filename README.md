@@ -62,11 +62,9 @@ adding all the things that make the game intuitive to the user
   
 ## potential next steps
 some of the potential next steps include:
-* Adding hints of some sort (hot an cold, or letting the hider peep out... etc)
-* Adding a restart mechanism
-* Adding more players
-* adding rooms (sockets)
-* fixing some minor bugs
+* creating a 3d/VR version of the game can be very fun
+* adding more players to the same game
+* different map/level designs for each game
 
 ## relevant references/resources that were utilized
 * for the sprites and imgs we used a few game sites that provided game assets.
