@@ -1,8 +1,8 @@
 # Connections Lab Final Project
 ## [project Link](https://melted-sun-one.glitch.me/)
+### The final project is a continuation of the second project. This version of the project takes into account much of the feedback received from friends and classmates and has been incorporated to produce a more enjoyable game
 ## production decisions (i.e. technical, design, conceptual, creative etc)
 #### planning
-### the final project is a continuation of the second project. This version of the project takes into account much of the feedback received from friends and classmates and has been incorporated to produce a more enjoyable game
 we first noted down the details of our idea. We wanted to make sure we understand the target audience and the challenges that we must face. This would help us know what we would focus on and get a better idea of the design aspects.<br>
 We also made sure to note down the overall steps, and made lists with bugs we encountered and any new steps that we thought were necessary after we started building the projecct.
 This is an example of the inetial project idea notes. (we filled the gaps in our later meetings)
