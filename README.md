@@ -80,7 +80,9 @@ I really enjoyed working on this project. It was really cool to finally see the 
 
 ## ⚫️ individual paragraphs for final project 
 #### Hashim's paragraph
+
 #### Nouf's pragraph
+improving the interface was alittle harder than I initially assumed. So much work had to go into predicting how the user would interact with our game's interfaces. It was also intresting to try and think of questions to ask our testers to gather as much feedback from the users about what isn't intuitive or could be improved and how they think it could be improved. We also spent alot of time thinking of the placement of all the elements of the page. This was really enjoyable and an intresting challenge!
 
 ## ⚫️ Features added since the last version:
 * Adding hints (hot and cold)
