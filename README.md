@@ -1,4 +1,4 @@
-# Connection_Lab_project_2
+# Connections Lab Final Project
 ## [project Link](https://melted-sun-one.glitch.me/)
 ## production decisions (i.e. technical, design, conceptual, creative etc)
 #### planning
