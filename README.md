@@ -78,6 +78,10 @@ Creating this project was some of the most fun time spent time I have spent deve
 #### Nouf's pragraph
 I really enjoyed working on this project. It was really cool to finally see the project running online with players on different devices! In this project I wanted to focus on the pre project preperation in terms of ideation and creating the frameworks. So in our first few meetings we made sure to have a clear idea about the project in terms of basic idea, challanges, desgin elements and so on. We also made sure to keep track of the steps we have already gone through and the ones we still need finish. We also kept track of bugs and potential new ideas for things in the project. This was really helpful becuase we we're a team working on this project. I worked on the initial front end and wanted to try to keep the code clean, modular, and intuitive, I think that I did well on the later two goals, but feel like I could do better on the first. There are a few variables that we're used in a version of the code that we scratched that remain in the final version. I think for next time I'll make sure to delete all associated variables when deleting a code block which reduces the need to look for them later on when cleaning the code.
 
+## ⚫️ individual paragraphs for final project 
+#### Hashim's paragraph
+#### Nouf's pragraph
+
 ## ⚫️ Features added since the last version:
 * Adding hints (hot and cold)
 * Adding a restart mechanism
@@ -124,7 +128,7 @@ we decided the ones that we would tackle which included:
 * add screen to tell hider and seeker that the hider has hid
 
 ### here are some of the chnages:
-## instructions page:
+### instructions page:
 <p align="left">
   <img src="readme_imgs/instructions_old.png" width="350" title="hover text">
 </p>
@@ -139,7 +143,7 @@ changes:<br>
   <img src="readme_imgs/instructions_new.png" width="350" title="hover text">
 </p>
 
-## role page:
+### role page:
 <p align="left">
   <img src="readme_imgs/hider_role_old.png" width="350" title="hover text">
 </p>
@@ -156,7 +160,7 @@ changes:<br>
   <img src="readme_imgs/seeker_role_old.png" width="350" title="hover text">
 </p>
 
-## hider hidden page:
+### hider hidden page:
 <p align="left">
   <img src="readme_imgs/hider_hidden_seeker.png" width="350" title="hover text">
 </p>
@@ -164,3 +168,7 @@ changes:<br>
   <img src="readme_imgs/hider_hidden_hider.png" width="350" title="hover text">
 </p>
 
+## ⚫️ future ideas:
+* Implement the game in a VR environment
+* Implement different hint systems/ allow different hints for different skill levels
+* Continue user testing to make the game even more intuitive
