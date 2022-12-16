@@ -1,5 +1,6 @@
-# Connection_Lab_project_2
-## [project Link](https://melted-sun-one.glitch.me/)
+# Connections Lab Final Project
+## [project Link](https://connections-lab---final-project.glitch.me/)
+### ⚫️ The final project is a continuation of the second project. This version of the project takes into account much of the feedback received from friends and classmates and has been incorporated to produce a more enjoyable game
 ## production decisions (i.e. technical, design, conceptual, creative etc)
 #### planning
 we first noted down the details of our idea. We wanted to make sure we understand the target audience and the challenges that we must face. This would help us know what we would focus on and get a better idea of the design aspects.<br>
@@ -21,7 +22,7 @@ We decided that the game was going to be a p5js game. Our first draft was one ro
 [Initial one player room](https://editor.p5js.org/Nouf-Alabbasi/sketches/SaNU4HA9x)<br>
 Once we tested that this works as intended, we moved on to create the seeker's version. using functions and classes made this steps a little easier. After testing we then moved on to creating the start, instruction and end pages. This was changed a little after testing but the main functionalities remained the same. We now had a game that has a hider and seeker views and the functionalities for both sides, however they are not connected yet. In the next section we talk about the backend, but as for the front end, after adding the sockets we expanded the eviroment to add more hiding places and rooms.
 
-#### backend end
+#### back end
 We decided to use sockets as our main way of communicating between the two players. This was done because the current design of the game does not have data that needs to be stored long term hence the primary information does not need to be stored and retrieved from databses. Socket.io was used to implement sockets. This allowed for real-time communication between the two players. Game data was stored on the client entirely. Only movement and actions are sent over the server. This allows for very minimal transfer required and hence low latency for the game.
 
 
@@ -38,30 +39,58 @@ Maintaining the seeker's view
 The seekers view to be displayed for the hider after he has hidden was also a challenging part to implement. This was because the view that was originally created also created the player object with the intention of being controlled by the client. This was then solved by creating a spectator attribute
 https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L756
 inside the player class which is set to true if the view is the seekers view from the hider's perspective. If this attribute is true, the player can not be controlled by the client and the moving data is retrieved from the original seeker through sockets.
-
 adding all the things that make the game intuitive to the user
   This is a very arbritrary challenge to overcome. As a developer it is much harder to think about how to develop the game for a user's intuition. Allowing our friends to play test the game is what truly helped in developing a sense of intuition from the users side. The small things that ended up making a big difference in creating good intuition were:
-  1. text to show time/places remaning
+  1. text to show time/places remaning: 
   https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L1051
-  2. creating pop-ups to show if no one is hiding
+  2. creating pop-ups to show if no one is hiding: 
   https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L414
-  3. adding appropriate sound effects
+  3. adding appropriate sound effects: 
   https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L415
+  4. showing intermediate screens between turns: 
+  This was done by including new states that the "state" variable could be set as. Then the same delay function introduced at
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/bf89c1a59da6ba7d421746c4ce12049ac0a6bafc/public/app.js#L147
+  is used to maintain the intermediate screens for a few seconds before moving onto the next screen.
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/9eab9093e9a11d90c39e53ab7bebe275453e5dd6/public/app.js#L76
+  5. restart mechanism: 
+  The restart problem was solved by creating a button similar to the start button at the start of the game and using it to reload the webpage in the browser. The     command is a simple javascript function and the button is the Button class created for the start button.
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/9eab9093e9a11d90c39e53ab7bebe275453e5dd6/public/app.js#L85
+  https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/9eab9093e9a11d90c39e53ab7bebe275453e5dd6/public/app.js#L23
+  6. rooms:
+  This category majorly includes the inclusion of rooms in our game. This allows multiple people to play this 2-player game by joining different rooms with their   friends. The implementation is made really simple throught he use of rooms already present in Socket.io. This category however also includes how smaller problems with connections are dealt with. For example disconnection of a user midgame should just allow the other player to restart the game. These design decisions and implementations is all bundled into the rooms implementation of the game.
+  
   
 ## potential next steps
 some of the potential next steps include:
-* Adding hints of some sort (hot an cold, or letting the hider peep out... etc)
-* Adding a restart mechanism
-* Adding more players
-* adding rooms (sockets)
-* fixing some minor bugs
+* creating a 3d/VR version of the game can be very fun
+* adding more players to the same game
+* different map/level designs for each game
+* making a mobile-friendly version
 
 ## relevant references/resources that were utilized
 * for the sprites and imgs we used a few game sites that provided game assets.
 
 ## individual paragraphs
-<!--- I think we write about our contributions and our experience ??)-->
 #### Hashim's paragraph
 Creating this project was some of the most fun time spent time I have spent developing. The most interesting part for me was to recreate a an activity that is so common in real life in the digital world. This change from reality to the internet meant a lot of decisions to be made. This included how to properly show the information and what can make the game intuitive. Some decisions like showing the seeker view to the hider after he has hidden is something different real life but in my personal view this makes it more interesting. I was mostly supposed to handle the backend of the game. Through this project I could truly understand why sockets can be so efficent for real-time information transfer.
+<p> Continuing the project for our final project was a very unique tasks. Much of the work that was now to be done was implementing feedback we had received from our classmates which was very different from implementing our ideas (like we had for project 2). This part of the development was also much more focused on fine-tuning the game further so everything flows naturally. This is much harder as a developer and so playtesting was a vital step towards thisreaching this final goal. </p>
+
 #### Nouf's pragraph
 I really enjoyed working on this project. It was really cool to finally see the project running online with players on different devices! In this project I wanted to focus on the pre project preperation in terms of ideation and creating the frameworks. So in our first few meetings we made sure to have a clear idea about the project in terms of basic idea, challanges, desgin elements and so on. We also made sure to keep track of the steps we have already gone through and the ones we still need finish. We also kept track of bugs and potential new ideas for things in the project. This was really helpful becuase we we're a team working on this project. I worked on the initial front end and wanted to try to keep the code clean, modular, and intuitive, I think that I did well on the later two goals, but feel like I could do better on the first. There are a few variables that we're used in a version of the code that we scratched that remain in the final version. I think for next time I'll make sure to delete all associated variables when deleting a code block which reduces the need to look for them later on when cleaning the code.
+
+## ⚫️ Features added since the last version:
+* Adding hints (hot and cold)
+* Adding a restart mechanism
+* Adding more players
+* adding rooms (sockets)
+* fixing bugs
+
+## ⚫️ User experience 
+for the current version of the Hide and Seek we wanted to improve the user experience to make the game as intuitive as possible. After user testing a few times and gathering the tester's feedback and make a list of possible improvments to the game.
+
+we decided the ones that we would tackle which included:
+Adjust timer (so it counts down instead of counts up -> 10,9,8...ect instead of 1,2,3...ext)
+add refresh button at the end page
+shorten the instructions
+fix hint system bug/ end game if user didn’t hide
+add screen to tell hider and seeker that the hider has hid
