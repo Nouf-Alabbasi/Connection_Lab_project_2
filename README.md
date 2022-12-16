@@ -57,7 +57,7 @@ adding all the things that make the game intuitive to the user
   https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/9eab9093e9a11d90c39e53ab7bebe275453e5dd6/public/app.js#L85
   https://github.com/Nouf-Alabbasi/Connection_Lab_project_2/blob/9eab9093e9a11d90c39e53ab7bebe275453e5dd6/public/app.js#L23
   6. rooms
-  This category majorly includes the inclusion of rooms in our game. This allows multiple people to play this 2-player game by joining different rooms with their friends. The implementation is made really simple throught he use of rooms already present in Socket.io. This category however also includes how smaller problems with connections are dealt with. For example disconnection of a user midgame should just allow the other player to restart the game. These design decisions and implementations is all bundled into the rooms implementation of the game.
+  <p>This category majorly includes the inclusion of rooms in our game. This allows multiple people to play this 2-player game by joining different rooms with their friends. The implementation is made really simple throught he use of rooms already present in Socket.io. This category however also includes how smaller problems with connections are dealt with. For example disconnection of a user midgame should just allow the other player to restart the game. These design decisions and implementations is all bundled into the rooms implementation of the game.</p>
   
   
 ## potential next steps
