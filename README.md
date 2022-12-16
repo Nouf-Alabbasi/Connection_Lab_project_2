@@ -87,10 +87,80 @@ I really enjoyed working on this project. It was really cool to finally see the 
 
 ## ⚫️ User experience 
 for the current version of the Hide and Seek we wanted to improve the user experience to make the game as intuitive as possible. After user testing a few times and gathering the tester's feedback and make a list of possible improvments to the game.
+#### User interface
+* The instruction page line is unaligned (left right and so on)
+* On the role page let the user know that they have 3 searches, and 10 secs to hide
+* The timer should go down not up
+* Let the users know that they need to refresh to restart a game or add a restart button
+* Hint placement unclear(check instructions)
+* Time and hint placement unnoticed
+  *  add a note about them in the instrictions
+  *  remind the users of their limited time and number of searches in the role page before the game starts
+* Shorten the instructions
+
+#### Tech
+* White hint bar when user doesn’t hide
+* Make hider lose when they don’t choose
+* Add screen to tell the hider that they hid
+* More time for the hider to hide
+* If user leaves, game shouldn’t end
+* The red doesn’t change quickly
+
+#### Minor
+* The hints in the instruction page look clickable 
+
+
+#### Extra features
+* The hints appear only if you ask for them(based on level)
+* let the seeker know where the hider hid if the seeker fails to find the hider.
+
 
 we decided the ones that we would tackle which included:
-Adjust timer (so it counts down instead of counts up -> 10,9,8...ect instead of 1,2,3...ext)
-add refresh button at the end page
-shorten the instructions
-fix hint system bug/ end game if user didn’t hide
-add screen to tell hider and seeker that the hider has hid
+* Adjust timer (so it counts down instead of counts up -> 10,9,8...ect instead of 1,2,3...ext)
+* add refresh button at the end page
+* shorten the instructions
+* add the "you have 15 sec to hide" or "you can search under a max of 3 furniture" text in the role page.
+* fix hint system bug/ end game if user didn’t hide
+* add screen to tell hider and seeker that the hider has hid
+
+### here are some of the chnages:
+## instructions page:
+<p align="left">
+  <img src="readme_imgs/instructions_old.png" width="350" title="hover text">
+</p>
+changes:<br>
+
+* we realized that people are likely to be already familiar with using the keybaord arrows to move around, so we reduced the instructions that explain that to make space for instructions about things the users are less familiar with or are unique to this game
+* we noticed that the hint instructions in the current version don't really indicate where they could be on the screen so we used screenshots of the hint/timer and search limit text on the screen and placed them in a position that could indicate their placement on the game screen
+* We also clarified the hint, timer and limited searches in the instructions page briefly.
+* We made sure that all the instructions are brief and can be understood as best as possible by a user who only scan this page
+
+<p align="left">
+  <img src="readme_imgs/instructions_new.png" width="350" title="hover text">
+</p>
+
+## role page:
+<p align="left">
+  <img src="readme_imgs/hider_role_old.png" width="350" title="hover text">
+</p>
+<p align="left">
+  <img src="readme_imgs/seeker_role_new.png" width="350" title="hover text">
+</p>
+changes:<br>
+
+* we added a short note on the time limit and maximum for users who skip over the insturctions page as those things are essential to the game 
+<p align="left">
+  <img src="readme_imgs/hider_role_new.png" width="350" title="hover text">
+</p>
+<p align="left">
+  <img src="readme_imgs/seeker_role_old.png" width="350" title="hover text">
+</p>
+
+## hider hidden page:
+<p align="left">
+  <img src="readme_imgs/hider_hidden_seeker.png" width="350" title="hover text">
+</p>
+<p align="left">
+  <img src="readme_imgs/hider_hidden_hider.png" width="350" title="hover text">
+</p>
+
