@@ -1,6 +1,6 @@
 # Connections Lab Final Project
-## [project Link](https://melted-sun-one.glitch.me/)
-### The final project is a continuation of the second project. This version of the project takes into account much of the feedback received from friends and classmates and has been incorporated to produce a more enjoyable game
+## [project Link](https://connections-lab---final-project.glitch.me/)
+### ⚫️ The final project is a continuation of the second project. This version of the project takes into account much of the feedback received from friends and classmates and has been incorporated to produce a more enjoyable game
 ## production decisions (i.e. technical, design, conceptual, creative etc)
 #### planning
 we first noted down the details of our idea. We wanted to make sure we understand the target audience and the challenges that we must face. This would help us know what we would focus on and get a better idea of the design aspects.<br>
@@ -78,9 +78,19 @@ Creating this project was some of the most fun time spent time I have spent deve
 #### Nouf's pragraph
 I really enjoyed working on this project. It was really cool to finally see the project running online with players on different devices! In this project I wanted to focus on the pre project preperation in terms of ideation and creating the frameworks. So in our first few meetings we made sure to have a clear idea about the project in terms of basic idea, challanges, desgin elements and so on. We also made sure to keep track of the steps we have already gone through and the ones we still need finish. We also kept track of bugs and potential new ideas for things in the project. This was really helpful becuase we we're a team working on this project. I worked on the initial front end and wanted to try to keep the code clean, modular, and intuitive, I think that I did well on the later two goals, but feel like I could do better on the first. There are a few variables that we're used in a version of the code that we scratched that remain in the final version. I think for next time I'll make sure to delete all associated variables when deleting a code block which reduces the need to look for them later on when cleaning the code.
 
-## Features added since the last version:
+## ⚫️ Features added since the last version:
 * Adding hints (hot and cold)
 * Adding a restart mechanism
 * Adding more players
 * adding rooms (sockets)
 * fixing bugs
+
+## ⚫️ User experience 
+for the current version of the Hide and Seek we wanted to improve the user experience to make the game as intuitive as possible. After user testing a few times and gathering the tester's feedback and make a list of possible improvments to the game.
+
+we decided the ones that we would tackle which included:
+Adjust timer (so it counts down instead of counts up -> 10,9,8...ect instead of 1,2,3...ext)
+add refresh button at the end page
+shorten the instructions
+fix hint system bug/ end game if user didn’t hide
+add screen to tell hider and seeker that the hider has hid
